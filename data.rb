@@ -10,6 +10,19 @@ require 'json'
 require 'pp'
 require 'uri'
 require 'date'
+require 'awesome_print'
+
+COLUMNAUTHORS = [
+	"Cardinal Cupich",
+	"Father Donald Sr.",
+	"Monsignor Michael Boland",
+	"Michelle Martin",
+	"Bishop Robert Barron",
+	"Father James Keenan",
+	"Don Wycliff",
+	"Kerry Robinson",
+	"Cardinal George"
+]
 
 FileUtils.mkdir('./xml') unless File.directory?('./xml')
 
@@ -21,4 +34,7 @@ FileUtils.mkdir('./xml/columns-xml') unless File.directory?('./xml/columns-xml')
 @password = "test"
 ################################################################################
 
-@columns = create_columns(get_column_files)
+@columns = create_columns_from_column(get_column_files)
+# create_cnwo_from_cnwonline(get_cnwonline_files)
+
+p get_cnwonline_files.size

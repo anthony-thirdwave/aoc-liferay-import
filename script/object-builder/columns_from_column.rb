@@ -1,4 +1,4 @@
-def create_columns(files)
+def create_columns_from_column(files)
 	ds = "senior_small.jpg"
 	ab = "Archbishop-Cupich-Informal_sm.jpg"
 	columns = []
@@ -32,7 +32,9 @@ def create_columns(files)
 			filename = ds
 		end
 
-		params = ['', filename, title, intro, author, content, date, i]
+		author = author == "Archbishop Cupich" ? "Cardinal Cupich" : author
+
+		params = ['', filename, title, intro, author, content, date, i + 1]
 		column = Column.new(params)
 
 		columns << column 
