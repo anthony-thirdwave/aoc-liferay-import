@@ -1,21 +1,24 @@
+Dir["./helpers/*.rb"].each { |file| require file }
+Dir["./classes/*.rb"].each { |file| require file }
+Dir["./script/xml-builder/*.rb"].each { |file| require file }
+Dir["./script/object-builder/*.rb"].each { |file| require file }
+require 'ruby-progressbar'
+require 'fileutils'
 require 'nokogiri'
+require 'net/http'
+require 'json'
+require 'pp'
+require 'uri'
+require 'date'
 
-f = File.open('assets/www.chicagocatholic.com/cnwonline/2017/0129/7.aspx') { |f| Nokogiri::HTML(f) }
+FileUtils.mkdir('./xml') unless File.directory?('./xml')
 
-# puts f
+FileUtils.mkdir('./xml/columns-xml') unless File.directory?('./xml/columns-xml')
 
-puts article_date = f.css('#pubdate')[0].children
+################################################################################
+# VARIABLES
+@username = "test@thirdwavellc.com"
+@password = "test"
+################################################################################
 
-puts article_title = f.css('#ArticleTitle').children
-
-puts article_author = f.css('#authorblock').children[3].children
-
-f.xpath('//comment()').remove
-f.css('div#articletext')[0].children.search('script').remove
-img = f.css('div#articletext')[0].css('div[id=ImageRotator]')
-f.css('div#articletext')[0].children.search('div[id=ImageRotator]').remove
-article_text = f.css('div#articletext')[0].children
-puts article_text
-
-filename = img.search('img').empty? ? '' : img.search('img').attr('src').to_s.split("/").last
-puts filename
+@columns = create_columns(get_column_files)

@@ -1,0 +1,404 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"articlet",
+				"articletext"
+			],
+			[
+				"research",
+				"research_array"
+			],
+			[
+				"pcatr",
+				"pcategories"
+			],
+			[
+				"categ",
+				"categories_json"
+			],
+			[
+				"assets_",
+				"assets_json"
+			],
+			[
+				"projects",
+				"projects_array"
+			],
+			[
+				"object",
+				"object_xml"
+			],
+			[
+				"media",
+				"media_array"
+			],
+			[
+				"categories",
+				"categories_json"
+			],
+			[
+				"offices",
+				"offices_array"
+			],
+			[
+				"mark",
+				"markets_array"
+			],
+			[
+				"col",
+				"col_sep"
+			],
+			[
+				"en",
+				"entryId"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 215.0,
+		"last_filter": "install",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"git",
+				"Git: Commit history"
+			]
+		],
+		"width": 431.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/anthony.surganov/Documents/LifeRay/ay-xml-builder"
+	],
+	"file_history":
+	[
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/xml/project-xml/project-12492.xml",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/data.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/xml-builder/media_xml_builder.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/xml-builder/project_xml_builder.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/helpers/api_call.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/helpers/json_import_functions.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/sql/pros-categories.sql",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/script/sql_builder.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/xml-builder/professional_xml_builder.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/xml-builder/office_xml_builder.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/xml-builder/research_xml_builder.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/script/api/research_api.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/helpers/xml_builder_helpers.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/helpers/sql_creater.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/README.md",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/Rakefile",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/xml/research-xml/reports/research-15559.xml",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/xml/office-xml/office-1043.xml",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/xml/research-xml/reports/research-10006.xml",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/xml/research-xml/white-papers/research-10807.xml",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/xml/research-xml/white-papers/research-1452.xml",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/xml/research-xml/reports/research-6000.xml",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/helpers/thousands.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/helpers/csv_import_functions.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/script/api/media_api.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/script/api/projects_api.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/classes/research.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/test.rb",
+		"/Users/anthony.surganov/Library/Application Support/Sublime Text 3/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/shoes.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/classes/pcategory_project_relation.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/classes/specialty.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/classes/pcategory.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/classes/project.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/testing.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/xml/media-xml/media-1692.xml",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/xml/media-xml/media-1610.xml",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/.gitignore",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/untitled.xml",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/api_import.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/helpers/pros_id_rewrite.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/sql_builder.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/API Media Output",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/json/test.json",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/driver.rb",
+		"/Users/anthony.surganov/Documents/avis_aql_script/ay-xml-builder/classes/market_office_relation.rb",
+		"/create-all.sql"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"p ",
+			"p",
+			"\\\"?><",
+			"  ",
+			"    ",
+			"   ",
+			"  ",
+			"\n<",
+			"    ",
+			"   ",
+			"  ",
+			"\"",
+			"p",
+			" :",
+			"gem",
+			"g",
+			" because its extensions are not built.  Try: ",
+			"  Try:",
+			"'0'",
+			"Q4 2016 San Mateo County Office Market Report_low res.pdf",
+			"filename",
+			"true",
+			"res.language",
+			"res.lang",
+			"lang",
+			"'en_US'",
+			"xml.cdata",
+			"xml.cdata ",
+			"project",
+			"Project",
+			"project",
+			"Project",
+			"project",
+			"Project",
+			"project",
+			"Project",
+			"project",
+			"projects",
+			"\t",
+			"[]",
+			"@",
+			"office",
+			"category",
+			"market",
+			"office_vocab_id",
+			"markets",
+			"offices",
+			"assets_json",
+			"categories_json",
+			"media",
+			"Media",
+			"media",
+			"medias",
+			",",
+			":",
+			"\t",
+			"  ",
+			"-",
+			" ",
+			"                                                                                                                        ",
+			"                                                                                                                       ",
+			"                                                                                                                      ",
+			"                                                                                                                     ",
+			"                                                                                                                    ",
+			"                                                                                                                   ",
+			"                                                                                                                  ",
+			"                                                                                                                 ",
+			"                                                                                                                ",
+			"                                                                                                               ",
+			"                                                                                                              ",
+			"                                                                                                             ",
+			"                                                                                                            ",
+			"                                                                                                           ",
+			"                                                                                                          ",
+			"                                                                                                         ",
+			"                                                                                                        ",
+			"                                                                                                       ",
+			"                                                                                                      ",
+			"                                                                                                     ",
+			" ",
+			"                                                                                               ",
+			"                                                                                              ",
+			"                                                                                                                         \n1692                                                                                                                        \n1921                                                                                                                   \n2418                                                                                                            \n2477                                                                                                           \n3166                                                                                                 \n3203                                 ",
+			"ress: ",
+			"|",
+			"=============================================================================================================================",
+			"============================================================================================================================",
+			"===========================================================================================================================",
+			"==========================================================================================================================",
+			"=========================================================================================================================",
+			"========================================================================================================================",
+			"=======================================================================================================================",
+			"======================================================================================================================",
+			"=====================================================================================================================",
+			"====================================================================================================================",
+			"===================================================================================================================",
+			"==================================================================================================================",
+			"=================================================================================================================",
+			"================================================================================================================",
+			"===============================================================================================================",
+			"==============================================================================================================",
+			"=============================================================================================================",
+			"============================================================================================================",
+			"===========================================================================================================",
+			"==========================================================================================================",
+			"=========================================================================================================",
+			"========================================================================================================",
+			"=======================================================================================================",
+			"======================================================================================================",
+			"=====================================================================================================",
+			"====================================================================================================",
+			"===================================================================================================",
+			"==================================================================================================",
+			"=================================================================================================",
+			"================================================================================================",
+			"===============================================================================================",
+			"==============================================================================================",
+			"=============================================================================================",
+			"============================================================================================",
+			"===========================================================================================",
+			"==========================================================================================",
+			"=========================================================================================",
+			"========================================================================================",
+			"=======================================================================================",
+			"======================================================================================",
+			"=====================================================================================",
+			"====================================================================================",
+			"==================================================================================="
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 24.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "aoc.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 267.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
