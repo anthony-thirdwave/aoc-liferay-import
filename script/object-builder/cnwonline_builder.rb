@@ -8,9 +8,10 @@ def create_cnwo_from_cnwonline(files)
 		author = get_author(file, f)
 		content = get_content(file, f)
 		intro = get_intro(content)
+		contributors = get_contributors(file)
 		id = i + 1
-
 		p '##################################################################################################################################################################################################################################################################'
-		# ap file
+		ap file
+		ap contributors
 	end
 end

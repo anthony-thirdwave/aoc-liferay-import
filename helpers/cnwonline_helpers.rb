@@ -124,3 +124,29 @@ def get_intro(content)
 	intro
 end
 
+def get_contributors(file)
+	case file
+	when "/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2008/0427/6.aspx"
+		contributors = 'Dennis Stoll of the Vocations Office contributed to this story'
+	when "/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2008/0622/1.aspx"
+		contributors = 'CNS contributed to this story'
+	when "/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2008/1012/1.aspx"
+		contributors = 'Catholic News Service contributed to this story'
+	when "/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2008/1026/2.aspx"
+		contributors = 'Catholic News Service contributed to this story.'
+	when "/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2008/1109/5.aspx"
+		contributors = 'CNS contributed to this story.'
+	when "/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2008/1221/5.aspx"
+		contributors = 'Michelle Martin contributed to this story.'
+	when "/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2010/0328/1.aspx"
+		contributors = 'CNS contributed to this story.'
+	when "/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2014/1005/6.aspx"
+		contributors = 'Michelle Martin contributed to this story'
+	when "/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2015/News/0612a.aspx"
+		contributors = "Catholic  News Service and the Office for Divine Worship contributed to this story."
+	when "/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2016/News/0805.aspx"
+		contributors = "The Catholic  Conference of Illinois contributed to this story."
+	else
+		contributors = ''
+	end
+end
