@@ -35,6 +35,6 @@ FileUtils.mkdir('./xml/columns-xml') unless File.directory?('./xml/columns-xml')
 ################################################################################
 
 @columns = create_columns_from_column(get_column_files)
-# create_cnwo_from_cnwonline(get_cnwonline_files)
+create_cnwo_from_cnwonline(get_cnwonline_files)
 
 p get_cnwonline_files.size
