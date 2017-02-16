@@ -4,9 +4,13 @@ def create_cnwo_from_cnwonline(files)
 	files.each_with_index do |file, i|
 		f = File.open("#{file}") { |f| Nokogiri::HTML(f) }
 		date = get_date(file)
-		title = get_title(file, f)
+		title = remove_whitespaces(remove_title_chars(get_title(file, f)))
 		author = get_author(file, f)
 		content = get_content(file, f)
-		
+		intro = get_intro(content)
+		id = i + 1
+
+		p '##################################################################################################################################################################################################################################################################'
+		# ap file
 	end
 end

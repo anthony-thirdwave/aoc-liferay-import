@@ -32,11 +32,15 @@ end
 
 
 def remove_whitespaces(string)
-	string.gsub("\r\n                             ", "").gsub("\r\n                    ", "").gsub("  ", " ")
+	string.gsub(/^ *|(?<= ) | *$/, "")
 end
 
-def remove_chars(string)
-	string.gsub("Ed<span class=\"title\">i</span>tor Photos by Karen Callaway  ", "").gsub("  Photos by Karen Callaway  ", "").gsub("<br>  \t\t", "").gsub("\t\t  ", "").gsub("<strong>", "").gsub("</strong>", "").gsub("<br> \t", "").gsub("\t", "").gsub("\t\t", "")
+def remove_title_chars(string)
+	string.gsub("\r", "").gsub("\t", "").gsub("\n", "").gsub("  ", " ").gsub("’", "'").gsub("‘", "'").gsub("<strong>", "").gsub("</strong>", "").gsub("<span>", "- ").gsub("</span>", "").gsub("<span style=\"display:block; font-size:80%; font-style:italic;\">", "- ").gsub("<span style=\"display:block; font-style:italic; font-size:75%;\">", "- ").gsub("<span class=\"drop-cap\">", "- ").gsub("<span class=\"no_indent\">", ". ")
+end
+
+def remove_content_chars(string)
+	string.gsub("\r", "").gsub("\t", "").gsub("\n", "")
 end
 
 def file_id(file)
@@ -85,20 +89,7 @@ def get_date(file)
 end
 
 def get_content(file, f)
-	weird_files = [
-		"/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2008/0330/1.aspx",
-		"/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2008/0511/4.aspx",
-		"/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2008/0608/4.aspx",
-		"/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2009/0510/4.aspx",
-		"/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2010/0523/1.aspx",
-		"/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2010/0704/1.aspx",
-		"/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2011/1120/1.aspx",
-		"/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2014/0615/3.aspx",
-		"/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2014/0727/3.aspx",
-		"/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2014/0810/3.aspx",
-		"/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2016/0724/8.aspx",
-		"/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2016/0724/9.aspx"
-	]
+	content_array = []
 
 	content = f.xpath('//div[@id="articletext"]/p')
 	content = content.empty? ? f.xpath('//div[@id="newsstorytext"]/p') : content
@@ -106,9 +97,30 @@ def get_content(file, f)
 	content = content.empty? ? f.xpath('//div[@class="article"]') : content
 	content = content.empty? ? f.xpath('//div[@id="articletext"]') : content
 
-	# if weird_files.include? file
-	# 	puts '##################################################################################################################################################################'
-	# 	puts "--------------#{file}"
-	# 	ap content
-	# end
+	content.each do |node|
+		if node.name != "p"
+			node.children.each do |mini_node|
+				if mini_node.name != "div"
+					if mini_node.name != "script"
+						content_array << remove_whitespaces(remove_content_chars(mini_node.to_s))
+					end
+				end
+			end
+		else
+			content_array << remove_whitespaces(remove_content_chars(node.to_s))
+		end
+	end
+
+	content_array.map { |s| "#{s}" }.join
 end
+
+def get_intro(content)
+	intro = content[0..100].gsub("<p class=\"no_indent\">", "").gsub("<p>", "").gsub("<span class=\"drop-cap\">", "").gsub("</span>", "").gsub("<strong>", "").gsub("</strong>", "").gsub("<em>", "").gsub("</em>", "").gsub("<p class=\"about no_indent\">", "").gsub("<p class=\"address\">", "").gsub("</p>", "")
+
+	if intro.include? "<"
+		intro = ''
+	end
+
+	intro
+end
+
