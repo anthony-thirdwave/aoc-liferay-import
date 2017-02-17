@@ -150,3 +150,77 @@ def get_contributors(file)
 		contributors = ''
 	end
 end
+
+# 46.43% of articles don't have images. 
+def get_image_data(file, f)
+	images = f.xpath('//div[@id="articletext"]/div[@id="ImageRotator"]')
+	images = images.empty? ? f.xpath('//div[@class="article"]/div[@id="ImageRotator"]') : images
+	images = images.empty? ? f.xpath('//div[@id="column_info"]/img') : images
+	images = images.empty? ? f.xpath('//div[@id="logo"]/img') : images
+	images = images.empty? ? f.xpath('//div[@id="article_head"]/h2/img') : images
+	images = images.empty? ? f.xpath('//div[@id="articletext"]/img') : images
+	images = images.empty? ? f.xpath('//div[@id="ibox"]/img') : images
+	images = images.empty? ? f.xpath('//div[@id="newsstorytext"]/div[@id="ImageRotator"]') : images
+	images = images.empty? ? f.xpath('//div[@id="articletext"]/div[@class="jubilarian"]/p/img') : images
+	images = images.empty? ? f.xpath('//div[@id="articletext"]/div[@class="rotator_image"]') : images
+	images = images.empty? ? f.xpath('//div[@id="articletext"]/p/img') : images
+	images = images.empty? ? f.xpath('//div[@id="articletext"]/div[@class="item"]') : images
+	images = images.empty? ? f.xpath('//div[@id="ImageRotator"]') : images
+	images = images.empty? ? f.xpath('//div[@style="width:438px; color:#888; font-size:85%;"]') : images
+	images = images.empty? ? f.xpath('//p[@class="no_indent"]/img') : images
+	images = images.empty? ? f.xpath('//ul[@id="deacon_list"]/li/img') : images
+	images = images.empty? ? f.xpath('//ul[@id="deaconlist"]/li/img') : images
+	images = images.empty? ? f.xpath('//div[@style="margin:8px auto;  width:400px;"]/img') : images
+	images = images.empty? ? f.xpath('//div[@class="imgdiv"]') : images
+
+	if images.empty?
+		images = f.xpath('//img')
+		if images.size == 20
+			images = "<img src=\"../../../images/FindingGraceDeadlySins.png\" width=\"200\" height=\"111\">"
+		else
+			images = []
+		end
+	end
+	images
+end
+
+def get_images(file, f)
+	images = get_image_data(file, f)
+	final_images = []
+	unless images.empty?
+		if images.size > 1 && !images.is_a?(String)
+			if file == "/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2008/0330/1.aspx"
+				images.each do |node|
+					node.children.each do |mini_node|
+						if mini_node.name == "img"
+							final_images << mini_node
+						end
+					end
+				end
+			else
+				images.each do |node|
+					if node.name == "div"
+						node.children.each do |mini_node|
+							mini_node.children.each do |mico_node|
+								if mico_node.name == "img"
+									final_images << mico_node
+								end
+							end
+						end
+					else
+						final_images << node
+					end
+				end
+			end
+		else
+			if !images.is_a?(String) && images.children.size != 0
+				images.search('img').each do |node|
+					final_images << node
+				end
+			else
+				final_images << images
+			end
+		end
+	end 
+	final_images
+end
