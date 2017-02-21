@@ -11,21 +11,6 @@ require 'pp'
 require 'uri'
 require 'date'
 require 'awesome_print'
-require 'pry'
-require 'pry-rescue'
-require 'pry-stack_explorer'
-
-COLUMNAUTHORS = [
-	"Cardinal Cupich",
-	"Father Donald Sr.",
-	"Monsignor Michael Boland",
-	"Michelle Martin",
-	"Bishop Robert Barron",
-	"Father James Keenan",
-	"Don Wycliff",
-	"Kerry Robinson",
-	"Cardinal George"
-]
 
 FileUtils.mkdir('./xml') unless File.directory?('./xml')
 
@@ -39,8 +24,13 @@ FileUtils.mkdir('./xml/columns-xml') unless File.directory?('./xml/columns-xml')
 
 # @columns = create_columns_from_column(get_column_files)
 @cnwonline_articles = create_cnwo_from_cnwonline(get_cnwonline_files)
+@column_articles = []
+@publications = []
 
 @cnwonline_articles.each do |article|
-	puts article.file
-	p article.cover_image
+	if article.is_a?(ColumnArticle)
+		@column_articles << article
+	else
+		@publications << article
+	end
 end

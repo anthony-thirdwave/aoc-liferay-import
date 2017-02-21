@@ -74,6 +74,7 @@ def get_author(file, f)
 		author = f.xpath('//div[@id="authorblock"]/p[@class="author"]').children.to_s.gsub("By ", "")
 		author = author.empty? || author == "Author" ? "Chicago Catholic" : author
 	end
+	author.gsub(" ", "").split(/(?=[A-Z])/).join(" ")
 end
 
 def get_date(file)
@@ -176,62 +177,68 @@ def get_image_data(file, f)
 	if images.empty?
 		images = f.xpath('//img')
 		if images.size == 20
-			images = "<img src=\"../../../images/FindingGraceDeadlySins.png\" width=\"200\" height=\"111\">"
+			images = "FindingGraceDeadlySins.png"
 		else
-			images = []
+			images = ''
 		end
 	end
 	images
 end
 
-def get_images(file, f)
-	images = get_image_data(file, f)
-	final_images = []
+def get_all_images(file, f)
+	ad_images = [
+		"nameplate_ie6.png",
+    "catolico.gif",
+    "safe_subscribe_logo.gif",
+    "PalosHospitalTile0117.jpg",
+    "CatholicUniversityTile0317.png",
+    "dhmTile0217.jpg",
+    "AbbeyCasketsFurnishingsTile0117.aspx",
+    "CSOTile0117.jpg",
+    "StMarySchoolTile0117.jpg",
+    "VocationOfficeTile0217.jpg",
+    "StPhilipNeriTile0217.png",
+    "email2.png",
+    "print.png",
+    "twitter32.png",
+    "facebook32.png",
+    "youtube32.png",
+    "CatholicCemeteriesTile0116.jpg",
+    "BeartoothTile0117.jpg",
+    "faustinaTile0217.jpg",
+    "RelevantRadioTile0309.png",
+    "cnw24_ie6.png",
+    "DirectoryAd.jpg",
+    "conversations.png",
+    "conv.jpg"
+	]
+
+	all_images = get_image_data(file, f)
+	ai = []
+	if !all_images.is_a?(String)
+		all_images.search('//img').each do |img|
+			img.attributes.each do |m_img|
+				if m_img[0] == "src"
+					if !ad_images.include?(m_img[1].value.split("/").last)
+						ai << m_img[1].value.split("/").last
+					end
+				end
+			end
+		end
+		all_images = ai
+	end
+	all_images
+end
+
+def get_image(file, f)
+	images = get_all_images(file, f)
+	final_image = ''
 	unless images.empty?
-		if images.size > 1 && !images.is_a?(String)
-			if file == "/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/cnwonline/2008/0330/1.aspx"
-				images.each do |node|
-					node.children.each do |mini_node|
-						if mini_node.name == "img"
-							final_images << mini_node
-						end
-					end
-				end
-			else
-				images.each do |node|
-					if node.name == "div"
-						node.children.each do |mini_node|
-							mini_node.children.each do |mico_node|
-								if mico_node.name == "img"
-									final_images << mico_node
-								end
-							end
-						end
-					else
-						final_images << node
-					end
-				end
-			end
+		if !images.is_a?(String)
+			final_image = images.first
 		else
-			if !images.is_a?(String) && images.children.size != 0
-				images.search('img').each do |node|
-					final_images << node
-				end
-			else
-				final_images << images
-			end
-		end
-	end 
-	if final_images[0].nil?
-		final_image = ''
-	else
-		final_image = final_images[0]
-		if final_image.is_a?(Array)
-			final_image = final_image[0]
+			final_image = images
 		end
 	end
-	if final_image.is_a?(Array)
-		ap "true"
-	end
-	final_image.flatten if !final_image.is_a?(String)
+	final_image
 end
