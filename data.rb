@@ -11,6 +11,9 @@ require 'pp'
 require 'uri'
 require 'date'
 require 'awesome_print'
+require 'pry'
+require 'pry-rescue'
+require 'pry-stack_explorer'
 
 COLUMNAUTHORS = [
 	"Cardinal Cupich",
@@ -34,7 +37,10 @@ FileUtils.mkdir('./xml/columns-xml') unless File.directory?('./xml/columns-xml')
 @password = "test"
 ################################################################################
 
-@columns = create_columns_from_column(get_column_files)
-create_cnwo_from_cnwonline(get_cnwonline_files)
+# @columns = create_columns_from_column(get_column_files)
+@cnwonline_articles = create_cnwo_from_cnwonline(get_cnwonline_files)
 
-# p get_cnwonline_files.size
+@cnwonline_articles.each do |article|
+	puts article.file
+	p article.cover_image
+end

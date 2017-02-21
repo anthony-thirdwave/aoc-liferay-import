@@ -121,7 +121,7 @@ def get_intro(content)
 		intro = ''
 	end
 
-	intro
+	remove_whitespaces(remove_content_chars(intro))
 end
 
 def get_contributors(file)
@@ -222,5 +222,16 @@ def get_images(file, f)
 			end
 		end
 	end 
-	final_images
+	if final_images[0].nil?
+		final_image = ''
+	else
+		final_image = final_images[0]
+		if final_image.is_a?(Array)
+			final_image = final_image[0]
+		end
+	end
+	if final_image.is_a?(Array)
+		ap "true"
+	end
+	final_image.flatten if !final_image.is_a?(String)
 end
