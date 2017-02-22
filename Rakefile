@@ -5,20 +5,14 @@ task :default do
 	end
 end
 
-# task :api_all do
-
-# end
+task :api_all do
+	ruby 'script/dependencies.rb'
+	ruby 'script/api-call/all.rb'
+end
 
 task :xml do
 	task :columns do
 		ruby 'script/dependencies.rb'
 		ruby 'script/object-builder/columns.rb'
-	end
-end
-
-task :api do
-	task :columns do
-		ruby 'script/dependencies.rb'
-		ruby 'script/api-call/columns_api.rb'
 	end
 end

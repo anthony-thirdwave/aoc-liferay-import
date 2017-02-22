@@ -40,9 +40,9 @@ def build_publications_xml(publications, fid)
         }
       }
     end
-    file = File.new("xml/publications-xml/publication-#{publication.id}.xml", 'w')
-    file.puts builder.to_xml
-    # invoke_liferay_api(builder.to_xml, publication, @username, @password, fid)
+    # file = File.new("xml/publications-xml/publication-#{publication.id}.xml", 'w')
+    # file.puts builder.to_xml
+    invoke_liferay_api(builder.to_xml, publication, @username, @password, fid)
     progressbar.increment
   end
   puts "Success!"

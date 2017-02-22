@@ -45,7 +45,3 @@ column_publications = split_articles(@cnwonline_articles)
 @galleries = create_gallery_objects(get_gallery_files)
 
 column_id_rewrite(@columns)
-
-build_columns_xml(@columns, @columns_fid)
-build_publications_xml(@publications, @publications_fid)
-build_galleries_xml(@galleries, @galleries_fid)
