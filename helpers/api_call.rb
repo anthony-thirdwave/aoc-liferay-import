@@ -30,7 +30,7 @@ def invoke_liferay_api(xml, object, username, password, fid)
   end
 
   if request.body.include? "exception"
-    puts ""
+    puts "Error with Column: " + pk  
   end
 end
 

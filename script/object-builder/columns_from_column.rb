@@ -21,22 +21,25 @@ def create_columns_from_column(files)
 
 		intro = content[0..49] + "..."
 
-		author = file.split("/")[-5].gsub("-", " ").split.map(&:capitalize).join(' ')
-
 		date_array = d.gsub(",", "").split(" ")
 		date_array[1], date_array[2] = date_array[1].to_i, date_array[2].to_i
-		date = DateTime.new(date_array[2], Date::MONTHNAMES.index(date_array[0]), date_array[1])
-
+		
+		author = file.split("/")[-5].gsub("-", " ").split.map(&:capitalize).join(' ')
 		if author == "Perspectives On Scripture"
 			author = "Donald Senior"
 			filename = ds
 		end
-
 		author = author == "Archbishop Cupich" ? "Cardinal Cupich" : author
 
-		params = ['', filename, title, intro, author, content, date, i + 1]
-		column = Column.new(params)
+		if file.split("/").last != "homily-for-opening-of-the-jubilee-of-mercy"
+			date = DateTime.new(date_array[2], Date::MONTHNAMES.index(date_array[0]), date_array[1])
+			params = ['', filename, title, intro, author, content, date, i + 1]
+		else
+			date = DateTime.new(2015, 12, 27)
+			params = ['', filename, title, intro, author, content, date, 27]
+		end
 
+		column = Column.new(params)
 		columns << column 
 	end
 	columns

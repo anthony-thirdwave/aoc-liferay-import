@@ -11,10 +11,12 @@ require 'pp'
 require 'uri'
 require 'date'
 require 'awesome_print'
+require 'pry'
 
 FileUtils.mkdir('./xml') unless File.directory?('./xml')
 
 FileUtils.mkdir('./xml/columns-xml') unless File.directory?('./xml/columns-xml')
+FileUtils.mkdir('./xml/articles-xml') unless File.directory?('./xml/articles-xml')
 
 ################################################################################
 # VARIABLES
@@ -22,7 +24,8 @@ FileUtils.mkdir('./xml/columns-xml') unless File.directory?('./xml/columns-xml')
 @password = "test"
 ################################################################################
 
-# @columns = create_columns_from_column(get_column_files)
+@columns = create_columns_from_column(get_column_files)
+@columns << create_columns_from_column(["/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/pl/column/archbishop-cupich/2015/12/27/homily-for-opening-of-the-jubilee-of-mercy"])[0]
 @cnwonline_articles = create_cnwo_from_cnwonline(get_cnwonline_files)
 @column_articles = []
 @publications = []
@@ -34,3 +37,11 @@ FileUtils.mkdir('./xml/columns-xml') unless File.directory?('./xml/columns-xml')
 		@publications << article
 	end
 end
+
+@column_articles += @columns
+@column_articles.each_with_index do |article, index|
+	article.id = index
+end
+
+# build_columns_xml(@column_articles, 0)
+build_articles_xml(@publications, 0)

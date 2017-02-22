@@ -1,5 +1,5 @@
 class Column
-	attr_reader :banner, :cover_image, :title, :intro, :author, :content, :date, :id
+	attr_accessor :banner, :cover_image, :title, :intro, :author, :content, :date, :id
 
 	def initialize(params)
 		@banner = params[0]
