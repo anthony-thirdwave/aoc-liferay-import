@@ -2,7 +2,11 @@
 GROUPID = "20329"
 
 def invoke_liferay_api(xml, object, username, password, fid)
-  date = object.date
+  if !object.is_a?(Gallery)
+    date = object.date
+  else
+    date = Date.today
+  end
   month = (date.strftime('%m').to_i - 1).to_s
   day = date.strftime('%d')
   year = date.strftime('%Y')
@@ -11,8 +15,20 @@ def invoke_liferay_api(xml, object, username, password, fid)
 
   title = object.title
 
-	sk = "COLUMN_STRUCTURE"
-	tk = "71711"
+  case object
+  when Column
+  	sk = "COLUMN_STRUCTURE"
+  	tk = "71711"
+  when CNWOnline
+    sk = "ARTICLE_STRUCTURE"
+    tk = "71703"
+  when Gallery
+    sk = "GALLERY_STRUCTURE"
+    tk = "71707"
+  else
+    sk = "COLUMN_STRUCTURE"
+    tk = "71711"
+  end
 
   pk = object.id.to_s
 
@@ -30,7 +46,20 @@ def invoke_liferay_api(xml, object, username, password, fid)
   end
 
   if request.body.include? "exception"
-    puts "Error with Column: " + pk  
+    case object
+    when CNWOnline
+      puts "Error with Publication: " + pk  
+      puts request.body
+    when Column
+      puts 'Error with Column: ' + pk  
+      puts request.body
+    when Gallery
+      puts 'Error with Gallery: ' + pk  
+      puts request.body
+    else
+      puts 'Error with Column: ' + pk
+      puts request.body
+    end
   end
 end
 

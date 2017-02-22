@@ -33,10 +33,10 @@ def create_columns_from_column(files)
 
 		if file.split("/").last != "homily-for-opening-of-the-jubilee-of-mercy"
 			date = DateTime.new(date_array[2], Date::MONTHNAMES.index(date_array[0]), date_array[1])
-			params = ['', filename, title, intro, author, content, date, i + 1]
+			params = ['', filename, title, intro.split(" ").join(" "), author, content.split(" ").join(" "), date, i + 1]
 		else
 			date = DateTime.new(2015, 12, 27)
-			params = ['', filename, title, intro, author, content, date, 27]
+			params = ['', filename, title, intro.split(" ").join(" "), author, content.split(" ").join(" "), date, 27]
 		end
 
 		column = Column.new(params)

@@ -16,32 +16,36 @@ require 'pry'
 FileUtils.mkdir('./xml') unless File.directory?('./xml')
 
 FileUtils.mkdir('./xml/columns-xml') unless File.directory?('./xml/columns-xml')
-FileUtils.mkdir('./xml/articles-xml') unless File.directory?('./xml/articles-xml')
+FileUtils.mkdir('./xml/publications-xml') unless File.directory?('./xml/publications-xml')
+FileUtils.mkdir('./xml/galleries-xml') unless File.directory?('./xml/galleries-xml')
 
 ################################################################################
 # VARIABLES
 @username = "test@thirdwavellc.com"
 @password = "test"
+
+@columns_fid = 23007
+@publications_fid = 23010
+@galleries_fid = 23013
 ################################################################################
 
-@columns = create_columns_from_column(get_column_files)
-@columns << create_columns_from_column(["/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/pl/column/archbishop-cupich/2015/12/27/homily-for-opening-of-the-jubilee-of-mercy"])[0]
-@cnwonline_articles = create_cnwo_from_cnwonline(get_cnwonline_files)
 @column_articles = []
 @publications = []
 
-@cnwonline_articles.each do |article|
-	if article.is_a?(ColumnArticle)
-		@column_articles << article
-	else
-		@publications << article
-	end
-end
+@columns = create_columns_from_column((get_column_files << "/Users/anthony.surganov/Documents/LifeRay/aoc-liferay-import/assets/www.chicagocatholic.com/pl/column/archbishop-cupich/2015/12/27/homily-for-opening-of-the-jubilee-of-mercy"))
+@cnwonline_articles = create_cnwo_from_cnwonline(get_cnwonline_files)
 
-@column_articles += @columns
-@column_articles.each_with_index do |article, index|
-	article.id = index
-end
 
-# build_columns_xml(@column_articles, 0)
-build_articles_xml(@publications, 0)
+column_publications = split_articles(@cnwonline_articles)
+
+@publications = column_publications[1]
+@column_articles = column_publications[0]
+@columns += @column_articles
+
+@galleries = create_gallery_objects(get_gallery_files)
+
+column_id_rewrite(@columns)
+
+build_columns_xml(@columns, @columns_fid)
+build_publications_xml(@publications, @publications_fid)
+build_galleries_xml(@galleries, @galleries_fid)
