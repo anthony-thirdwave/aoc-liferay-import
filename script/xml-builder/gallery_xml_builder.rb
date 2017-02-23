@@ -5,12 +5,12 @@ def build_galleries_xml(galleries, fid)
       xml.root('available-locales' => 'en_US', 'default-locale' => 'en_US') {
         xml.send(:"dynamic-element", 'name' => 'Gallery_Title', 'type' => 'text', 'index-type' => 'keyword', 'index' => '0') {
           xml.send(:"dynamic-content", 'language-id' => 'en_US') {
-            xml.cdata gallery.title
+            xml.cdata gallery.title.force_encoding('ISO-8859-1').encode('UTF-8')
           }
         }
         xml.send(:"dynamic-element", 'name' => 'Gallery_Intro', 'type' => 'text_box', 'index-type' => 'keyword', 'index' => '0') {
           xml.send(:"dynamic-content", 'language-id' => 'en_US') {
-            xml.cdata gallery.intro
+            xml.cdata gallery.intro.force_encoding('ISO-8859-1').encode('UTF-8').gsub("&amp;", "and")
           }
         }
         xml.send(:"dynamic-element", 'name' => 'Cover_Image', 'type' => 'document_library', 'index-type' => 'keyword', 'index' => '0') {
@@ -27,16 +27,16 @@ def build_galleries_xml(galleries, fid)
             }
             xml.send(:"dynamic-element", 'name' => 'Caption_and_Credit', 'index' => index, 'type' => 'text_box', 'index-type' => 'keyword') {
               xml.send(:"dynamic-content", 'language-id' => 'en_US') {
-                xml.cdata content[1]
+                xml.cdata content[1].force_encoding('ISO-8859-1').encode('UTF-8')
               }
             }
           }
         end
       }
     end
-    # file = File.new("xml/galleries-xml/gallery-#{gallery.id}.xml", 'w')
-    # file.puts builder.to_xml
-    invoke_liferay_api(builder.to_xml, gallery, @username, @password, fid)
+    file = File.new("xml/galleries-xml/gallery-#{gallery.id}.xml", 'w')
+    file.puts builder.to_xml
+    # invoke_liferay_api(builder.to_xml, gallery, @username, @password, fid)
     progressbar.increment
   end
   puts "Success!"

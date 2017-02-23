@@ -24,7 +24,7 @@ def get_gallery_id(file)
 end
 
 def get_gallery_title(f)
-	remove_content_chars(f.xpath('//h2[@id="GalleryTitle"]').children.to_s).split(" ").join(" ")
+	remove_content_chars(f.xpath('//h2[@id="GalleryTitle"]').children.to_s).split(" ").join(" ").force_encoding('ISO-8859-1').encode('UTF-8').gsub("'","").gsub("…", "...").gsub(";", "").gsub("<br>", "").gsub("–", "-").gsub(",", "").gsub(":", " -").gsub("/", "-").gsub("&amp;", "and").gsub("&amp", "and").gsub("\"", "")
 end
 
 def get_gallery_intro(f)

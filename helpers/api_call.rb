@@ -2,7 +2,7 @@
 GROUPID = "20329"
 
 def invoke_liferay_api(xml, object, username, password, fid)
-  if !object.is_a?(Gallery)
+  if !object.is_a?(Gallery) || !object.is_a?(Author)
     date = object.date
   else
     date = Date.today
@@ -16,18 +16,18 @@ def invoke_liferay_api(xml, object, username, password, fid)
   title = object.title
 
   case object
-  when Column
+  when ColumnArticle
   	sk = "COLUMN_STRUCTURE"
   	tk = "71711"
-  when CNWOnline
+  when PublicationArticle
     sk = "ARTICLE_STRUCTURE"
     tk = "71703"
   when Gallery
     sk = "GALLERY_STRUCTURE"
     tk = "71707"
   else
-    sk = "COLUMN_STRUCTURE"
-    tk = "71711"
+    sk = "AUTHOR_STRUCTURE"
+    tk = "PUB_AUTHOR"
   end
 
   pk = object.id.to_s
@@ -35,7 +35,7 @@ def invoke_liferay_api(xml, object, username, password, fid)
   uri = URI.parse("http://localhost:8080/api/jsonws/journalarticle/add-article")
   request = Net::HTTP::Post.new(uri)
   request.basic_auth(username, password)
-  request.body = "groupId="+GROUPID+"&folderId="+fid+"&classNameId=0&classPK="+pk+"&articleId=&autoArticleId=true&titleMap={en_US:"+title+"}&descriptionMap={description:"+title+"}&content="+xml+"&type=general&ddmStructureKey="+sk+"&ddmTemplateKey="+tk+"&layoutUuid=&displayDateMonth="+month+"&displayDateDay="+day+"&displayDateYear="+year+"&displayDateHour="+hour+"&displayDateMinute="+minute+"&expirationDateMonth=12&expirationDateDay=17&expirationDateYear=2017&expirationDateHour=12&expirationDateMinute=12&neverExpire=true&reviewDateMonth=12&reviewDateDay=12&reviewDateYear=2019&reviewDateHour=12&reviewDateMinute=12&neverReview=true&indexable=true&articleURL="
+  request.body = "groupId="+GROUPID+"&folderId="+fid+"&classNameId=0&classPK="+pk+"&articleId=&autoArticleId=true&titleMap={en_US:"+title+"}&descriptionMap={description:"+title+"}&content="+xml.force_encoding('ISO-8859-1').encode('UTF-8')+"&type=general&ddmStructureKey="+sk+"&ddmTemplateKey="+tk+"&layoutUuid=&displayDateMonth="+month+"&displayDateDay="+day+"&displayDateYear="+year+"&displayDateHour="+hour+"&displayDateMinute="+minute+"&expirationDateMonth=12&expirationDateDay=17&expirationDateYear=2017&expirationDateHour=12&expirationDateMinute=12&neverExpire=true&reviewDateMonth=12&reviewDateDay=12&reviewDateYear=2019&reviewDateHour=12&reviewDateMinute=12&neverReview=true&indexable=true&articleURL="
 
   req_options = {
     use_ssl: uri.scheme == "https",
@@ -45,21 +45,9 @@ def invoke_liferay_api(xml, object, username, password, fid)
     http.request(request)
   end
 
-  if request.body.include? "exception"
-    case object
-    when CNWOnline
-      puts "Error with Publication: " + pk  
-      puts request.body
-    when Column
-      puts 'Error with Column: ' + pk  
-      puts request.body
-    when Gallery
-      puts 'Error with Gallery: ' + pk  
-      puts request.body
-    else
-      puts 'Error with Column: ' + pk
-      puts request.body
-    end
+  if response.body.include? "\"exception\""
+    puts "Error with #{object.class}: " + pk
+    ap response.body
   end
 end
 

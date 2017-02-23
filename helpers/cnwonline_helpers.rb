@@ -59,6 +59,17 @@ def get_title(file, f)
 		title = f.xpath('//div[@id="article_head"]/h2').children.to_s
 		title = title.empty? ? f.xpath('//div[@id="article_head"]/h3').children.to_s : title
 	end
+	if title == "<!-- InstanceBeginEditable name=\"title\" -->Embracing the love of Christ<!-- InstanceEndEditable -->"
+		title = "Embracing the love of Christ"
+	elsif title == "<!-- InstanceBeginEditable name=\"title\" -->Schools and Scholarships<!-- InstanceEndEditable -->"
+		title = "Schools and Scholarships"
+	else
+		title
+	end
+	if title.empty?
+		title = "Column Entry"
+	end
+	title.split(" ").join(" ").gsub("'","").gsub("…", "...").gsub(";", "").gsub("<br>", "").gsub("–", "-").gsub(",", "").gsub(":", " -").force_encoding('ISO-8859-1').encode('UTF-8')
 end
 
 def get_author(file, f)
@@ -177,7 +188,7 @@ def get_image_data(file, f)
 	if images.empty?
 		images = f.xpath('//img')
 		if images.size == 20
-			images = "FindingGraceDeadlySins.png"
+			images = "/images/FindingGraceDeadlySins.png"
 		else
 			images = ''
 		end
@@ -220,7 +231,7 @@ def get_all_images(file, f)
 			img.attributes.each do |m_img|
 				if m_img[0] == "src"
 					if !ad_images.include?(m_img[1].value.split("/").last)
-						ai << m_img[1].value.split("/").last
+						ai << m_img[1].value
 					end
 				end
 			end
@@ -240,5 +251,14 @@ def get_image(file, f)
 			final_image = images
 		end
 	end
-	final_image
+	final_image = file.split("/").last == "cardinal.aspx" ? "../../../images/shared/cardinal_george.jpg" : final_image
+	if final_image.split("..").join.gsub("///", "/")[0, 1] != "/"
+		if final_image.split("..").join.gsub("///", "/").prepend("/").size == 1
+			final_image.split("..").join.gsub("///", "/")
+		else
+			final_image.split("..").join.gsub("///", "/").prepend("/")
+		end
+	else
+		final_image.split("..").join.gsub("///", "/")
+	end
 end

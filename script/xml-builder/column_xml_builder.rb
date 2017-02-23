@@ -1,3 +1,13 @@
+BROKENCOLUMNS = [
+  408,
+  411,
+  444,
+  445,
+  510,
+  526,
+  634
+]
+
 def build_columns_xml(columns, fid)
   progressbar = ProgressBar.create(:total => columns.length)
   columns.each do |column|
@@ -28,18 +38,19 @@ def build_columns_xml(columns, fid)
             xml.cdata column.author
           }
         }
-        xml.send(:"dynamic-element", 'name' => 'Column_Content', 'type' => 'text_box', 'index-type' => 'keyword', 'index' => '0') {
+        xml.send(:"dynamic-element", 'name' => 'Column_Content', 'type' => 'text_area', 'index-type' => 'keyword', 'index' => '0') {
           xml.send(:"dynamic-content", 'language-id' => 'en_US') {
-            xml.cdata column.content
+            xml.cdata remove_chars(remove_HTML_entities(column.content))
           }
         }
       }
     end
-    # file = File.new("xml/columns-xml/column-#{column.id}.xml", 'w')
-    # file.puts builder.to_xml
-    invoke_liferay_api(builder.to_xml, column, @username, @password, fid)
+    file = File.new("xml/columns-xml/column-#{column.id}.xml", 'w')
+    file.puts builder.to_xml
+    # if !BROKENCOLUMNS.include?(column.id.to_i)
+    #   invoke_liferay_api(builder.to_xml, column, @username, @password, fid)
+    # end
     progressbar.increment
   end
   puts "Success!"
 end
-

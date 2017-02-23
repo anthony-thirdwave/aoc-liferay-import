@@ -1,3 +1,10 @@
+BROKENPUBLICATIONS = [
+  251,
+  639,
+  839,
+  967
+]
+
 def build_publications_xml(publications, fid)
   progressbar = ProgressBar.create(:total => publications.length)
   publications.each do |publication|
@@ -5,7 +12,7 @@ def build_publications_xml(publications, fid)
       xml.root('available-locales' => 'en_US', 'default-locale' => 'en_US') {
         xml.send(:"dynamic-element", 'name' => 'Article_Title', 'type' => 'text_box', 'index-type' => 'keyword', 'index' => '0') {
           xml.send(:"dynamic-content", 'language-id' => 'en_US') {
-            xml.cdata publication.title
+            xml.cdata remove_chars(remove_HTML_entities(publication.title))
           }
         }
         xml.send(:"dynamic-element", 'name' => 'Cover_Image', 'type' => 'document_library', 'index-type' => 'keyword', 'index' => '0') {
@@ -20,7 +27,7 @@ def build_publications_xml(publications, fid)
         }
         xml.send(:"dynamic-element", 'name' => 'Article_Intro', 'type' => 'text_box', 'index-type' => 'keyword', 'index' => '0') {
           xml.send(:"dynamic-content", 'language-id' => 'en_US') {
-            xml.cdata publication.intro
+            xml.cdata remove_chars(remove_HTML_entities(publication.intro))
           }
         }
         xml.send(:"dynamic-element", 'name' => 'Author_and_Dept', 'type' => 'text_box', 'index-type' => 'keyword', 'index' => '0') {
@@ -30,7 +37,7 @@ def build_publications_xml(publications, fid)
         }
         xml.send(:"dynamic-element", 'name' => 'Article_Content', 'type' => 'text_area', 'index-type' => 'keyword', 'index' => '0') {
           xml.send(:"dynamic-content", 'language-id' => 'en_US') {
-            xml.cdata publication.content
+            xml.cdata remove_chars(remove_HTML_entities(publication.content))
           }
         }
         xml.send(:"dynamic-element", 'name' => 'Contributors', 'type' => 'text_box', 'index-type' => 'keyword', 'index' => '0') {
@@ -40,9 +47,11 @@ def build_publications_xml(publications, fid)
         }
       }
     end
-    # file = File.new("xml/publications-xml/publication-#{publication.id}.xml", 'w')
-    # file.puts builder.to_xml
-    invoke_liferay_api(builder.to_xml, publication, @username, @password, fid)
+    file = File.new("xml/publications-xml/publication-#{publication.id}.xml", 'w')
+    file.puts builder.to_xml
+    # if !BROKENPUBLICATIONS.include?(publication.id.to_i)
+    #   invoke_liferay_api(builder.to_xml, publication, @username, @password, fid)
+    # end
     progressbar.increment
   end
   puts "Success!"

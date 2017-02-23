@@ -5,14 +5,29 @@ task :default do
 	end
 end
 
-task :api_all do
-	ruby 'script/dependencies.rb'
-	ruby 'script/api-call/all.rb'
-end
+namespace :api do
+	task :all do
+		ruby 'script/dependencies.rb'
+		ruby 'script/api-call/all.rb'
+	end
 
-task :xml do
 	task :columns do
 		ruby 'script/dependencies.rb'
-		ruby 'script/object-builder/columns.rb'
+		ruby 'script/api-call/columns_api.rb'
+	end
+
+	task :galleries do
+		ruby 'script/dependencies.rb'
+		ruby 'script/api-call/galleries_api.rb'
+	end
+
+	task :publications do
+		ruby 'script/dependencies.rb'
+		ruby 'script/api-call/publications_api.rb'
+	end
+
+	task :authors do
+		ruby 'script/dependencies.rb'
+		ruby 'script/api-call/authors_api.rb'
 	end
 end

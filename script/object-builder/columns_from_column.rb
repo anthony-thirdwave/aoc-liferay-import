@@ -1,6 +1,6 @@
 def create_columns_from_column(files)
-	ds = "senior_small.jpg"
-	ab = "Archbishop-Cupich-Informal_sm.jpg"
+	ds = "/images/senior_small.jpg"
+	ab = "/images/Archbishop-Cupich-Informal_sm.jpg"
 	columns = []
 
 	files.each_with_index do |file, i|
@@ -13,10 +13,10 @@ def create_columns_from_column(files)
 
 		if file.split("/")[-5] == "donald-senior"
 			content = remove_entities(f.search('//p')[4..-2].to_s.gsub(filler, ""))
-			filename = ds
+			image = ds
 		else
 			content = remove_whitespaces(remove_entities(f.search('//p')[3..-1].to_s.gsub(filler, ""))).gsub("<p id=\"column_title\">Perspectives on ScriptureJanuary 8 2017 <a href=\"http  www.usccb.org bible readings 010817.cfm\" target=\"_blank\">The Epiphany of the Lord< a><br>  ", "").gsub("<a href=\"http  www.chicagocatholic.com column archbishop-cupich 2016 08 07 a-church-that-teaches-and-learns\">", "").gsub("<a href=\"http  www.chicagocatholic.com column archbishop-cupich 2016 07 24 families-the-privileged-place-of-gods-revelation\">", "").gsub("< a>", "").gsub("<p class=\"next-article-link article-link\"><a href=\" column donald-senior 2017 01 15 what-am-i-called-to\">Next Second Sunday in Ordinary Time", "")
-			filename = file.split("/")[-5] == "archbishop-cupich" ? ab : ''
+			image = file.split("/")[-5] == "archbishop-cupich" ? ab : ''
 		end
 
 		intro = content[0..49] + "..."
@@ -27,19 +27,19 @@ def create_columns_from_column(files)
 		author = file.split("/")[-5].gsub("-", " ").split.map(&:capitalize).join(' ')
 		if author == "Perspectives On Scripture"
 			author = "Donald Senior"
-			filename = ds
+			image = ds
 		end
 		author = author == "Archbishop Cupich" ? "Cardinal Cupich" : author
 
 		if file.split("/").last != "homily-for-opening-of-the-jubilee-of-mercy"
 			date = DateTime.new(date_array[2], Date::MONTHNAMES.index(date_array[0]), date_array[1])
-			params = ['', filename, title, intro.split(" ").join(" "), author, content.split(" ").join(" "), date, i + 1]
+			params = ['', image, title, author, content.split(" ").join(" "), intro.split(" ").join(" "), '', date, i + 1, file, '']
 		else
 			date = DateTime.new(2015, 12, 27)
-			params = ['', filename, title, intro.split(" ").join(" "), author, content.split(" ").join(" "), date, 27]
+			params = ['', image, title, author, content.split(" ").join(" "), intro.split(" ").join(" "), '', date, 27, file, '']
 		end
 
-		column = Column.new(params)
+		column = ColumnArticle.new(params)
 		columns << column 
 	end
 	columns

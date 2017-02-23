@@ -16,9 +16,19 @@ def create_cnwo_from_cnwonline(files)
 		file_a = file.split("/")[-5..-1].join("/")
 		params = ['']
 		f = File.open("#{file}") { |f| Nokogiri::HTML(f) }
-		params << images = get_image(file, f)
+		if file.split("/").last == "5min.aspx"
+			image = "/images/cnw/logos/5Min.png"
+		elsif file.split("/").last == "pride.aspx"
+			image = "/images/cnw/logos/parishpride.png"
+		elsif file.split("/").last == "familyroom.aspx"
+			image = "/images/cnw/logos/familyroom.jpg"
+		else
+			image = get_image(file, f)
+			image = image.include?("katolik.gif") ? "" : image
+		end
+		params << image
 		params << title = remove_whitespaces(remove_title_chars(get_title(file, f)))
-		params << author = remove_whitespaces(remove_title_chars(get_author(file, f)))
+		params << author = remove_whitespaces(remove_title_chars(get_author(file, f))).split(" ").join(" ")
 		params << content = (get_content(file, f).to_s).split(" ").join(" ")
 		params << intro = remove_whitespaces(remove_content_chars(get_intro(content))).split(" ").join(" ")
 		params << contributors = get_contributors(file)
@@ -29,7 +39,7 @@ def create_cnwo_from_cnwonline(files)
 		if COLUMNAUTHORS.include? params[3]
 			cnwonline << ColumnArticle.new(params)
 		else
-			cnwonline << CNWOnline.new(params)
+			cnwonline << PublicationArticle.new(params)
 		end
 	end
 	cnwonline
