@@ -1,3 +1,5 @@
 server/*
 xml/*
 assets/*
+json/*
+csv/*

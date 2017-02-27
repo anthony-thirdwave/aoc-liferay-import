@@ -1,6 +1,6 @@
 def create_columns_from_column(files)
-	ds = "/images/senior_small.jpg"
-	ab = "/images/Archbishop-Cupich-Informal_sm.jpg"
+	ds = "/senior_small.jpg"
+	ab = "/Archbishop-Cupich-Informal_sm.jpg"
 	columns = []
 
 	files.each_with_index do |file, i|
@@ -36,7 +36,7 @@ def create_columns_from_column(files)
 			params = ['', image, title, author, content.split(" ").join(" "), intro.split(" ").join(" "), '', date, i + 1, file, '']
 		else
 			date = DateTime.new(2015, 12, 27)
-			params = ['', image, title, author, content.split(" ").join(" "), intro.split(" ").join(" "), '', date, 27, file, '']
+			params = ['', image.gsub("../../..", ""), title, author, content.split(" ").join(" "), intro.split(" ").join(" "), '', date, 27, file, '']
 		end
 
 		column = ColumnArticle.new(params)

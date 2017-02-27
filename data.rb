@@ -7,6 +7,7 @@ require 'fileutils'
 require 'nokogiri'
 require 'net/http'
 require 'json'
+require 'csv'
 require 'pp'
 require 'uri'
 require 'date'
@@ -18,16 +19,17 @@ FileUtils.mkdir('./xml') unless File.directory?('./xml')
 FileUtils.mkdir('./xml/columns-xml') unless File.directory?('./xml/columns-xml')
 FileUtils.mkdir('./xml/publications-xml') unless File.directory?('./xml/publications-xml')
 FileUtils.mkdir('./xml/galleries-xml') unless File.directory?('./xml/galleries-xml')
-FileUtils.mkdir('./xml/authors-xml/') unless File.directory?('./xml/xml/authors-xml/')
+FileUtils.mkdir('./xml/authors-xml/') unless File.directory?('./xml/authors-xml')
 
 ################################################################################
 # VARIABLES
 @username = "test@thirdwavellc.com"
 @password = "test"
 
-@columns_fid = "23007"
-@publications_fid = "23010"
-@galleries_fid = "23013"
+@columns_fid = "124221"
+@publications_fid = "124218"
+@galleries_fid = "124227"
+@authors_fid = "124224"
 ################################################################################
 
 @column_articles = []
@@ -42,9 +44,8 @@ column_publications = split_articles(@cnwonline_articles)
 @column_articles = column_publications[0]
 @publications = column_publications[1]
 @columns += @column_articles
+column_id_rewrite(@columns)
 
-@galleries = create_gallery_objects(get_gallery_files)
 
 @authors = create_authors(@columns, @publications)
-
-column_id_rewrite(@columns)
+@galleries = create_gallery_objects(get_gallery_files)

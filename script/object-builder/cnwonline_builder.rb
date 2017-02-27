@@ -26,7 +26,7 @@ def create_cnwo_from_cnwonline(files)
 			image = get_image(file, f)
 			image = image.include?("katolik.gif") ? "" : image
 		end
-		params << image
+		params << image.gsub("../../..", "")
 		params << title = remove_whitespaces(remove_title_chars(get_title(file, f)))
 		params << author = remove_whitespaces(remove_title_chars(get_author(file, f))).split(" ").join(" ")
 		params << content = (get_content(file, f).to_s).split(" ").join(" ")

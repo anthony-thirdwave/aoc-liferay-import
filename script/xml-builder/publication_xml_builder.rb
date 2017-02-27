@@ -17,7 +17,7 @@ def build_publications_xml(publications, fid)
         }
         xml.send(:"dynamic-element", 'name' => 'Cover_Image', 'type' => 'document_library', 'index-type' => 'keyword', 'index' => '0') {
           xml.send(:"dynamic-content", 'language-id' => 'en_US') {
-            xml.cdata publication.cover_image
+            xml.cdata remap_image(publication.cover_image)
           }
         }
         xml.send(:"dynamic-element", 'name' => 'Image_Caption_and_Credit', 'type' => 'text_box', 'index-type' => 'keyword', 'index' => '0') {
@@ -47,11 +47,11 @@ def build_publications_xml(publications, fid)
         }
       }
     end
-    file = File.new("xml/publications-xml/publication-#{publication.id}.xml", 'w')
-    file.puts builder.to_xml
-    # if !BROKENPUBLICATIONS.include?(publication.id.to_i)
-    #   invoke_liferay_api(builder.to_xml, publication, @username, @password, fid)
-    # end
+    # file = File.new("xml/publications-xml/publication-#{publication.id}.xml", 'w')
+    # file.puts builder.to_xml
+    if !BROKENPUBLICATIONS.include?(publication.id.to_i)
+      invoke_liferay_api(builder.to_xml, publication, @username, @password, fid)
+    end
     progressbar.increment
   end
   puts "Success!"

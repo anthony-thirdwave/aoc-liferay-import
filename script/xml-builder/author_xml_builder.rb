@@ -1,3 +1,17 @@
+BROKENAUTHORS = [
+  24,
+  25,
+  26,
+  30,
+  34,
+  42,
+  48,
+  56,
+  74,
+  84,
+  91,
+  110
+]
 def build_author_xml(authors, fid)
   progressbar = ProgressBar.create(:total => authors.length)
   authors.each do |author|
@@ -10,9 +24,11 @@ def build_author_xml(authors, fid)
         }
       }
     end
-    file = File.new("xml/authors-xml/author-#{author.id}.xml", 'w')
-    file.puts builder.to_xml
-    # invoke_liferay_api(builder.to_xml, author, @username, @password, fid)
+    # file = File.new("xml/authors-xml/author-#{author.id}.xml", 'w')
+    # file.puts builder.to_xml
+    if !BROKENAUTHORS.include?(author.id.to_i)
+      invoke_liferay_api(builder.to_xml, author, @username, @password, fid)
+    end
     progressbar.increment
   end
   puts "Success!"

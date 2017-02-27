@@ -261,4 +261,5 @@ def get_image(file, f)
 	else
 		final_image.split("..").join.gsub("///", "/")
 	end
+	final_image
 end

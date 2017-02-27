@@ -1,11 +1,18 @@
 BROKENCOLUMNS = [
   408,
   411,
+  412,
+  415,
   444,
   445,
+  448,
+  449,
   510,
+  514,
   526,
-  634
+  530,
+  634,
+  638
 ]
 
 def build_columns_xml(columns, fid)
@@ -20,7 +27,7 @@ def build_columns_xml(columns, fid)
         }
         xml.send(:"dynamic-element", 'name' => 'Column_Cover_Image', 'type' => 'document_library', 'index-type' => 'keyword', 'index' => '0') {
           xml.send(:"dynamic-content", 'language-id' => 'en_US') {
-            xml.cdata column.cover_image
+            xml.cdata remap_image(column.cover_image)
           }
         }
         xml.send(:"dynamic-element", 'name' => 'Column_Title', 'type' => 'text_box', 'index-type' => 'keyword', 'index' => '0') {
@@ -45,11 +52,11 @@ def build_columns_xml(columns, fid)
         }
       }
     end
-    file = File.new("xml/columns-xml/column-#{column.id}.xml", 'w')
-    file.puts builder.to_xml
-    # if !BROKENCOLUMNS.include?(column.id.to_i)
-    #   invoke_liferay_api(builder.to_xml, column, @username, @password, fid)
-    # end
+    # file = File.new("xml/columns-xml/column-#{column.id}.xml", 'w')
+    # file.puts builder.to_xml
+    if !BROKENCOLUMNS.include?(column.id.to_i)
+      invoke_liferay_api(builder.to_xml, column, @username, @password, fid)
+    end
     progressbar.increment
   end
   puts "Success!"
