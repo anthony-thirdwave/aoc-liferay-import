@@ -9,14 +9,14 @@ def create_gallery_objects(files)
 			if params.empty?
 				params = get_gallery_params(file, f)
 			end
-			slider << [get_gallery_image(f), get_credit_caption(f)]
+			slider << [remap_image(get_gallery_image(f)), get_credit_caption(f)]
 		else
 			params[3] = slider
 			params[5] = gallery_tracker
 			galleries << Gallery.new(params)
 			params = get_gallery_params(file, f)
 			slider = []
-			slider << [get_gallery_image(f), get_credit_caption(f)]
+			slider << [remap_image(get_gallery_image(f)), get_credit_caption(f)]
 			gallery_tracker = get_gallery_id(file)
 		end
 	end

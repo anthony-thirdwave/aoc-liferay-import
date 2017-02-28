@@ -1,7 +1,7 @@
 # Change this to POST to a different site
 GROUPID = "20329"
 
-def invoke_liferay_api(xml, object, username, password, fid)
+def invoke_liferay_api(xml, object, fid)
   if object.is_a?(Gallery)
     date = Date.today
   elsif object.is_a?(Author)
@@ -46,7 +46,7 @@ end
 def post_article(fid, pk, title, xml, sk, tk, month, day, year, hour, minute)
   uri = URI.parse("http://localhost:8080/api/jsonws/journalarticle/add-article")
   request = Net::HTTP::Post.new(uri)
-  request.basic_auth(username, password)
+  request.basic_auth(@username, @password)
   request.body = "groupId="+GROUPID+"&folderId="+fid+"&classNameId=0&classPK="+pk+"&articleId=&autoArticleId=true&titleMap={en_US:"+title+"}&descriptionMap={description:"+title+"}&content="+xml.force_encoding('ISO-8859-1').encode('UTF-8')+"&type=general&ddmStructureKey="+sk+"&ddmTemplateKey="+tk+"&layoutUuid=&displayDateMonth="+month+"&displayDateDay="+day+"&displayDateYear="+year+"&displayDateHour="+hour+"&displayDateMinute="+minute+"&expirationDateMonth=12&expirationDateDay=17&expirationDateYear=2017&expirationDateHour=12&expirationDateMinute=12&neverExpire=true&reviewDateMonth=12&reviewDateDay=12&reviewDateYear=2019&reviewDateHour=12&reviewDateMinute=12&neverReview=true&indexable=true&articleURL="
 
   req_options = {
@@ -63,11 +63,11 @@ def post_article(fid, pk, title, xml, sk, tk, month, day, year, hour, minute)
   end
 end
 
-def update_article(username, password, articleID, articleURL)
+def update_article(articleID, articleURL)
   uri = URI.parse("http://localhost:8080/api/jsonws/journalarticle/update-status")
   request = Net::HTTP::Post.new(uri)
-  request.basic_auth(username, password)
-  request.body = "groupId="+GROUPID+"&articleId="+articleID+"&version=1.0&status=2&articleURL="+articleURL
+  request.basic_auth(@username, @password)
+  request.body = "groupId="+GROUPID+"&articleId="+articleID+"&version=1.0&status=0&articleURL="+articleURL
 
   req_options = {
     use_ssl: uri.scheme == "https",
@@ -78,7 +78,7 @@ def update_article(username, password, articleID, articleURL)
   end
 
   if response.body.include? "\"exception\""
-    puts "Error PATCHing #{object.class}: " + pk
+    puts "Error PATCHing articleURL: " + articleURL
     ap response.body
   end
 end

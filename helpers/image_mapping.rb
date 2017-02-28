@@ -17,9 +17,12 @@ def remap_image(image_path)
 	images.each do |image|
 		if image["title"] == tree_ascii.last
 			if image["treePath"] == tree
-				tree = "/documents/" + "20329" + image["treePath"] + image["title"].gsub(" ", "+") + "/" + image["uuid_"]
+				tree = "/documents/" + "20329/" + image["treePath"].split("/")[-1] + "/" + image["title"].gsub(" ", "+") + "/" + image["uuid_"]
 			end
 		end
 	end
 	tree
 end
+
+
+

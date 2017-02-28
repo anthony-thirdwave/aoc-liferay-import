@@ -55,7 +55,7 @@ def build_columns_xml(columns, fid)
     # file = File.new("xml/columns-xml/column-#{column.id}.xml", 'w')
     # file.puts builder.to_xml
     if !BROKENCOLUMNS.include?(column.id.to_i)
-      invoke_liferay_api(builder.to_xml, column, @username, @password, fid)
+      invoke_liferay_api(builder.to_xml, column, fid)
     end
     progressbar.increment
   end

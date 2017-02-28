@@ -36,9 +36,8 @@ def build_galleries_xml(galleries, fid)
     end
     # file = File.new("xml/galleries-xml/gallery-#{gallery.id}.xml", 'w')
     # file.puts builder.to_xml
-    invoke_liferay_api(builder.to_xml, gallery, @username, @password, fid)
+    invoke_liferay_api(builder.to_xml, gallery, fid)
     progressbar.increment
   end
   puts "Success!"
 end
-
