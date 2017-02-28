@@ -35,12 +35,6 @@ namespace :api do
 		ruby 'script/dependencies.rb'
 		ruby 'script/api-call/authors_api.rb'
 	end
-
-	desc 'PATCHes LifeRay articles to DRAFT in lieu of PUBLISHED'
-	task :patch do
-		ruby 'script/dependencies.rb'
-		ruby 'script/api-call/update_to_draft.rb'
-	end
 end
 
 desc 'Creates a CSV of all article titles.'

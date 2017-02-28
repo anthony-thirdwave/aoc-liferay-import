@@ -62,23 +62,3 @@ def post_article(fid, pk, title, xml, sk, tk, month, day, year, hour, minute)
     ap response.body
   end
 end
-
-def update_article(articleID, articleURL)
-  uri = URI.parse("http://localhost:8080/api/jsonws/journalarticle/update-status")
-  request = Net::HTTP::Post.new(uri)
-  request.basic_auth(@username, @password)
-  request.body = "groupId="+GROUPID+"&articleId="+articleID+"&version=1.0&status=0&articleURL="+articleURL
-
-  req_options = {
-    use_ssl: uri.scheme == "https",
-  }
-
-  response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-    http.request(request)
-  end
-
-  if response.body.include? "\"exception\""
-    puts "Error PATCHing articleURL: " + articleURL
-    ap response.body
-  end
-end
