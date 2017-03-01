@@ -133,7 +133,7 @@ def get_intro(content)
 		intro = ''
 	end
 
-	remove_whitespaces(remove_content_chars(intro))
+	remove_whitespaces(remove_content_chars(intro)) + "..."
 end
 
 def get_contributors(file)

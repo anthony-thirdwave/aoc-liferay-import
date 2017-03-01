@@ -15,7 +15,7 @@ def titles_to_csv(articles)
  			gsubbed.each do |sub|
  				article.title.gsub!(sub[0], sub[1])
  			end
-	 		line << [article.title]
+	 		line << [article.title, article.file]
 		  progressbar.increment
 		end
 	end
@@ -39,7 +39,7 @@ def column_titles_csv(columns)
  			gsubbed.each do |sub|
  				column.title.gsub!(sub[0], sub[1])
  			end
-	 		line << [column.title]
+	 		line << [column.title, column.file]
 		  progressbar.increment
 		end
 	end

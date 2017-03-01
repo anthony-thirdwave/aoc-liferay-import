@@ -6,7 +6,7 @@ def remove_HTML_entities(string)
 		["&#8212;", "-"],
 		[" &#8211;", "-"],
 		["<em>", ""],
-		["</em>", ""]
+		["</em>", ""],
 	]
 	entities.each do |entity|
 		string.gsub!(entity[0], entity[1])
@@ -20,6 +20,19 @@ def remove_chars(string)
 		["&", "and"],
 		["%", " percent"],
 		["/", "-"]
+	]
+	chars.each do |char|
+		string.gsub!(char[0], char[1])
+	end
+	string
+end
+
+def remove_title_entities(string)
+	chars = [
+		["â\u0080\u0098", "'"],
+		["â\u0080\u0099", "'"],
+		["â\u0080\u009C", ""],
+		["â\u0080\u009D", ""]
 	]
 	chars.each do |char|
 		string.gsub!(char[0], char[1])

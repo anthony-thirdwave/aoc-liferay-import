@@ -27,17 +27,19 @@ def create_cnwo_from_cnwonline(files)
 			image = image.include?("katolik.gif") ? "" : image
 		end
 		params << image.gsub("../../..", "")
-		params << title = remove_whitespaces(remove_title_chars(get_title(file, f)))
-		params << author = remove_whitespaces(remove_title_chars(get_author(file, f))).split(" ").join(" ")
-		params << content = (get_content(file, f).to_s).split(" ").join(" ")
+		params << title = remove_title_entities(remove_whitespaces(remove_title_chars(get_title(file, f))).gsub(%r{</?[^>]+?>}, ''))
+		params << author = remove_whitespaces(remove_title_chars(get_author(file, f))).split(" ").join(" ").gsub(%r{</?[^>]+?>}, '')
+		params << content = (get_content(file, f).to_s).split(" ").join(" ").gsub(%r{</?[^>]+?>}, '')
 		params << intro = remove_whitespaces(remove_content_chars(get_intro(content))).split(" ").join(" ")
-		params << contributors = get_contributors(file)
+		params << contributors = get_contributors(file).gsub(%r{</?[^>]+?>}, '')
 		params << date = get_date(file)
 		params << id = i + 1
 		params << p_file = file_a
 		params << all_images = get_all_images(file, f)
 		if COLUMNAUTHORS.include? params[3]
-			cnwonline << ColumnArticle.new(params)
+			if !file.include? "_pl"
+				cnwonline << ColumnArticle.new(params)
+			end
 		else
 			cnwonline << PublicationArticle.new(params)
 		end

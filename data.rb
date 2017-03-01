@@ -26,10 +26,10 @@ FileUtils.mkdir('./xml/authors-xml/') unless File.directory?('./xml/authors-xml'
 @username = "test@thirdwavellc.com"
 @password = "test"
 
-@columns_fid = "124221"
-@publications_fid = "124218"
-@galleries_fid = "124227"
-@authors_fid = "124224"
+@columns_fid = "21443"
+@publications_fid = "21446"
+@galleries_fid = "21449"
+@authors_fid = "21452"
 ################################################################################
 
 @column_articles = []

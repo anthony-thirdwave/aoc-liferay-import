@@ -19,7 +19,8 @@ def create_columns_from_column(files)
 			image = file.split("/")[-5] == "archbishop-cupich" ? ab : ''
 		end
 
-		intro = content[0..49] + "..."
+		content = content.gsub(%r{</?[^>]+?>}, '')
+		intro = content[0..100] + "..."
 
 		date_array = d.gsub(",", "").split(" ")
 		date_array[1], date_array[2] = date_array[1].to_i, date_array[2].to_i
@@ -31,6 +32,9 @@ def create_columns_from_column(files)
 		end
 		author = author == "Archbishop Cupich" ? "Cardinal Cupich" : author
 
+		author = author.gsub(%r{</?[^>]+?>}, '')
+		title = remove_title_entities(title.gsub(%r{</?[^>]+?>}, ''))
+
 		if file.split("/").last != "homily-for-opening-of-the-jubilee-of-mercy"
 			date = DateTime.new(date_array[2], Date::MONTHNAMES.index(date_array[0]), date_array[1])
 			params = ['', image, title, author, content.split(" ").join(" "), intro.split(" ").join(" "), '', date, i + 1, file, '']
@@ -39,8 +43,10 @@ def create_columns_from_column(files)
 			params = ['', image.gsub("../../..", ""), title, author, content.split(" ").join(" "), intro.split(" ").join(" "), '', date, 27, file, '']
 		end
 
-		column = ColumnArticle.new(params)
-		columns << column 
+		if !file.include? "_pl"
+			column = ColumnArticle.new(params)
+			columns << column 
+		end
 	end
 	columns
 end

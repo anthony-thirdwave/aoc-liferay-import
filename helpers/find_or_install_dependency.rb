@@ -1,6 +1,6 @@
 def find_or_install_dependency
   gems = {
-    'nokogiri' => '~> 1.7.0.1',
+    'nokogiri' => '~> 1.6.0',
     'ruby-progressbar' => '~> 1.8.1',
     'json' => '~> 2.0'
   }
