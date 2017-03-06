@@ -127,11 +127,7 @@ def get_content(file, f)
 end
 
 def get_intro(content)
-	intro = content[0..100].gsub("<p class=\"no_indent\">", "").gsub("<p>", "").gsub("<span class=\"drop-cap\">", "").gsub("</span>", "").gsub("<strong>", "").gsub("</strong>", "").gsub("<em>", "").gsub("</em>", "").gsub("<p class=\"about no_indent\">", "").gsub("<p class=\"address\">", "").gsub("</p>", "")
-
-	if intro.include? "<"
-		intro = ''
-	end
+	intro = content[0..100].gsub(%r{</?[^>]+?>}, '')
 
 	remove_whitespaces(remove_content_chars(intro)) + "..."
 end

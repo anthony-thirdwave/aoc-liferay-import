@@ -26,10 +26,10 @@ FileUtils.mkdir('./xml/authors-xml/') unless File.directory?('./xml/authors-xml'
 @username = "test@thirdwavellc.com"
 @password = "test"
 
-@columns_fid = "21443"
-@publications_fid = "21446"
-@galleries_fid = "21449"
-@authors_fid = "21452"
+@columns_fid = "21219"
+@publications_fid = "21225"
+@galleries_fid = "21222"
+@authors_fid = "21216"
 ################################################################################
 
 @column_articles = []
@@ -49,3 +49,8 @@ column_id_rewrite(@columns)
 
 @authors = create_authors(@columns, @publications)
 @galleries = create_gallery_objects(get_gallery_files)
+
+# @columns.each do |column|
+# 	ap column.file
+# 	ap column.all_images
+# end

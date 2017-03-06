@@ -8,19 +8,15 @@ def create_columns_from_column(files)
 
 		d = f.css('#pubdate').children.to_s[1..-1]
 		title = file.split("/").last.gsub("-", " ").split.map(&:capitalize).join(' ')
-		file
-		filler = f.xpath('//p[@class = "prev-article-link article-link"]').to_s
 
 		if file.split("/")[-5] == "donald-senior"
-			content = remove_entities(f.search('//p')[4..-2].to_s.gsub(filler, ""))
+			content = remove_p_tags(f.search('//p')[4..-2].to_s)
 			image = ds
 		else
-			content = remove_whitespaces(remove_entities(f.search('//p')[3..-1].to_s.gsub(filler, ""))).gsub("<p id=\"column_title\">Perspectives on ScriptureJanuary 8 2017 <a href=\"http  www.usccb.org bible readings 010817.cfm\" target=\"_blank\">The Epiphany of the Lord< a><br>  ", "").gsub("<a href=\"http  www.chicagocatholic.com column archbishop-cupich 2016 08 07 a-church-that-teaches-and-learns\">", "").gsub("<a href=\"http  www.chicagocatholic.com column archbishop-cupich 2016 07 24 families-the-privileged-place-of-gods-revelation\">", "").gsub("< a>", "").gsub("<p class=\"next-article-link article-link\"><a href=\" column donald-senior 2017 01 15 what-am-i-called-to\">Next Second Sunday in Ordinary Time", "")
+			content = remove_p_tags(remove_whitespaces(f.search('//p')[3..-1].to_s))
 			image = file.split("/")[-5] == "archbishop-cupich" ? ab : ''
 		end
-
-		content = content.gsub(%r{</?[^>]+?>}, '')
-		intro = content[0..100] + "..."
+		intro = (content[0..100] + "...").gsub(%r{</?[^>]+?>}, '')
 
 		date_array = d.gsub(",", "").split(" ")
 		date_array[1], date_array[2] = date_array[1].to_i, date_array[2].to_i
@@ -35,11 +31,11 @@ def create_columns_from_column(files)
 		author = author.gsub(%r{</?[^>]+?>}, '')
 		title = remove_title_entities(title.gsub(%r{</?[^>]+?>}, ''))
 
+		date = get_column_date(file)
+
 		if file.split("/").last != "homily-for-opening-of-the-jubilee-of-mercy"
-			date = DateTime.new(date_array[2], Date::MONTHNAMES.index(date_array[0]), date_array[1])
 			params = ['', image, title, author, content.split(" ").join(" "), intro.split(" ").join(" "), '', date, i + 1, file, '']
 		else
-			date = DateTime.new(2015, 12, 27)
 			params = ['', image.gsub("../../..", ""), title, author, content.split(" ").join(" "), intro.split(" ").join(" "), '', date, 27, file, '']
 		end
 

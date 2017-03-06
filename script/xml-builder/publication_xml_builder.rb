@@ -32,7 +32,10 @@ BROKENPUBLICATIONS = [
   1495,
   1523,
   1561,
+  1684,
+  1685,
   1686,
+  1687,
   1695
 ]
 
@@ -48,7 +51,7 @@ def build_publications_xml(publications, fid)
         }
         xml.send(:"dynamic-element", 'name' => 'Cover_Image', 'type' => 'document_library', 'index-type' => 'keyword', 'index' => '0') {
           xml.send(:"dynamic-content", 'language-id' => 'en_US') {
-            xml.cdata remap_image(publication.cover_image)
+            xml.cdata empty_cover_image(remap_image(publication.cover_image))
           }
         }
         xml.send(:"dynamic-element", 'name' => 'Image_Caption_and_Credit', 'type' => 'text_box', 'index-type' => 'keyword', 'index' => '0') {
@@ -58,7 +61,7 @@ def build_publications_xml(publications, fid)
         }
         xml.send(:"dynamic-element", 'name' => 'Article_Intro', 'type' => 'text_box', 'index-type' => 'keyword', 'index' => '0') {
           xml.send(:"dynamic-content", 'language-id' => 'en_US') {
-            xml.cdata remove_chars(remove_HTML_entities(publication.intro))
+            xml.cdata publication.intro
           }
         }
         xml.send(:"dynamic-element", 'name' => 'Author_and_Dept', 'type' => 'text_box', 'index-type' => 'keyword', 'index' => '0') {
@@ -68,7 +71,7 @@ def build_publications_xml(publications, fid)
         }
         xml.send(:"dynamic-element", 'name' => 'Article_Content', 'type' => 'text_area', 'index-type' => 'keyword', 'index' => '0') {
           xml.send(:"dynamic-content", 'language-id' => 'en_US') {
-            xml.cdata remove_chars(remove_HTML_entities(publication.content))
+            xml.cdata remove_p_tags(remove_content_chars(publication.content).gsub("<<", "<").gsub(">>", ">"))
           }
         }
         xml.send(:"dynamic-element", 'name' => 'Contributors', 'type' => 'text_box', 'index-type' => 'keyword', 'index' => '0') {
