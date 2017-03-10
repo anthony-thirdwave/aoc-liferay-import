@@ -19,6 +19,9 @@ FileUtils.mkdir('./xml') unless File.directory?('./xml')
 FileUtils.mkdir('./xml/columns-xml') unless File.directory?('./xml/columns-xml')
 FileUtils.mkdir('./xml/publications-xml') unless File.directory?('./xml/publications-xml')
 FileUtils.mkdir('./xml/galleries-xml') unless File.directory?('./xml/galleries-xml')
+FileUtils.mkdir('./xml/galleries-xml/galleries') unless File.directory?('./xml/galleries-xml/galleries')
+FileUtils.mkdir('./xml/galleries-xml/columns') unless File.directory?('./xml/galleries-xml/columns')
+FileUtils.mkdir('./xml/galleries-xml/publications') unless File.directory?('./xml/galleries-xml/publications')
 FileUtils.mkdir('./xml/authors-xml/') unless File.directory?('./xml/authors-xml')
 
 ################################################################################
@@ -50,7 +53,7 @@ column_id_rewrite(@columns)
 @publications = rewrite_cover_image(create_rotator(@publications))
 
 @authors = create_authors(@columns, @publications)
-# @galleries = create_gallery_objects(get_gallery_files)
+@galleries = create_gallery_objects(get_gallery_files)
 
-@galleries = create_related_galleries(@columns)
-# @galleries += create_related_galleries(@publications)
+@col_galleries = create_related_galleries(@columns)
+@pub_galleries = create_related_galleries(@publications)

@@ -88,7 +88,7 @@ def create_related_galleries(objects)
 			params << object.id
 			slider = []
 			for i in (0..(object.rotator[0].size - 1))
-				slider << [object.rotator[0][i], object.rotator[1][i]]
+				slider << [remap_image(object.rotator[0][i]), object.rotator[1][i]]
 			end
 			params[3] = slider
 			galleries << Gallery.new(params)
