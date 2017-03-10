@@ -34,9 +34,9 @@ def create_columns_from_column(files)
 		date = get_column_date(file)
 
 		if file.split("/").last != "homily-for-opening-of-the-jubilee-of-mercy"
-			params = ['', image, title, author, content.split(" ").join(" "), intro.split(" ").join(" "), '', date, i + 1, file, '']
+			params = ['', image, title, author, content.split(" ").join(" "), intro.split(" ").join(" "), '', date, i + 1, file.split("/")[-5..-1].join("/"), '', get_rotator_content(file, f)]
 		else
-			params = ['', image.gsub("../../..", ""), title, author, content.split(" ").join(" "), intro.split(" ").join(" "), '', date, 27, file, '']
+			params = ['', image.gsub("../../..", ""), title, author, content.split(" ").join(" "), intro.split(" ").join(" "), '', date, 27, file.split("/")[-5..-1].join("/"), '', get_rotator_content(file, f)]
 		end
 
 		if !file.include? "_pl"

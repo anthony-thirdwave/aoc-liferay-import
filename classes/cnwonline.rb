@@ -1,5 +1,5 @@
 class CNWOnline
-	attr_accessor :banner, :cover_image, :title, :intro, :contributors, :author, :content, :date, :id, :file, :all_images
+	attr_accessor :banner, :cover_image, :title, :intro, :contributors, :author, :content, :date, :id, :file, :all_images, :rotator
 
 	def initialize(params)
 		@banner = params[0]
@@ -13,5 +13,6 @@ class CNWOnline
 		@id = params[8]
 		@file = params[9]
 		@all_images = params[10]
+		@rotator = params[11]
 	end
 end

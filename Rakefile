@@ -42,3 +42,10 @@ task :csv do
 	ruby 'script/dependencies.rb'
 	ruby 'script/build_csv.rb'
 end
+
+desc 'Test functions'
+task :test do
+	ruby 'script/dependencies.rb'
+	puts "\nTesting Functions..."
+	ruby 'test.rb'
+end

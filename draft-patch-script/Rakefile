@@ -1,7 +1,7 @@
 task :default do 
 	ARGV.each { |a| task a.to_sym do ; end } 
 	if ARGV[1].nil?
-		puts "Sorry, command not understood. Please use: \n$ rake -T\nto see a list of all available rake tasks."
+		puts "Sorry, command not understood. Please use:\n$ rake --tasks\nto see a list of all available rake tasks."
 	end
 end
 

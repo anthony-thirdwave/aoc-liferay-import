@@ -26,10 +26,10 @@ FileUtils.mkdir('./xml/authors-xml/') unless File.directory?('./xml/authors-xml'
 @username = "test@thirdwavellc.com"
 @password = "test"
 
-@columns_fid = "21219"
-@publications_fid = "21225"
-@galleries_fid = "21222"
-@authors_fid = "21216"
+@columns_fid = "21299"
+@publications_fid = "21302"
+@galleries_fid = "21305"
+@authors_fid = "21296"
 ################################################################################
 
 @column_articles = []
@@ -46,11 +46,11 @@ column_publications = split_articles(@cnwonline_articles)
 @columns += @column_articles
 column_id_rewrite(@columns)
 
+@columns = rewrite_cover_image(create_rotator(@columns))
+@publications = rewrite_cover_image(create_rotator(@publications))
 
 @authors = create_authors(@columns, @publications)
-@galleries = create_gallery_objects(get_gallery_files)
+# @galleries = create_gallery_objects(get_gallery_files)
 
-# @columns.each do |column|
-# 	ap column.file
-# 	ap column.all_images
-# end
+@galleries = create_related_galleries(@columns)
+# @galleries += create_related_galleries(@publications)

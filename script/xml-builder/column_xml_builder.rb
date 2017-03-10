@@ -44,7 +44,6 @@ def build_columns_xml(columns, fid)
         xml.send(:"dynamic-element", 'name' => 'Column_Cover_Image', 'type' => 'document_library', 'index-type' => 'keyword', 'index' => '0') {
           xml.send(:"dynamic-content", 'language-id' => 'en_US') {
             xml.cdata empty_cover_image(remap_image(column.cover_image))
-            ap empty_cover_image(remap_image(column.cover_image))
           }
         }
         xml.send(:"dynamic-element", 'name' => 'Column_Title', 'type' => 'text_box', 'index-type' => 'keyword', 'index' => '0') {
@@ -69,11 +68,11 @@ def build_columns_xml(columns, fid)
         }
       }
     end
-    file = File.new("xml/columns-xml/column-#{column.id}.xml", 'w')
-    file.puts builder.to_xml
-    # if !BROKENCOLUMNS.include?(column.id.to_i)
-    #   invoke_liferay_api(builder.to_xml, column, fid)
-    # end
+    # file = File.new("xml/columns-xml/column-#{column.id}.xml", 'w')
+    # file.puts builder.to_xml
+    if !BROKENCOLUMNS.include?(column.id.to_i)
+      invoke_liferay_api(builder.to_xml, column, fid)
+    end
     progressbar.increment
   end
   puts "Success!"

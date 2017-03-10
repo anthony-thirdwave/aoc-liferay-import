@@ -25,17 +25,17 @@ def invoke_liferay_api(xml, object, fid)
 
   case object
   when ColumnArticle
-  	sk = "146751"
-  	tk = "146792"
+  	sk = "COLUMN_STRUCTURE"
+  	tk = "110602"
   when PublicationArticle
-    sk = "146747"
-    tk = "146786"
+    sk = "ARTICLE_STRUCTURE"
+    tk = "109324"
   when Gallery
-    sk = "146691"
-    tk = "146774"
+    sk = "GALLERY_STRUCTURE"
+    tk = "GALLERY_TEMPLATE"
   else
-    sk = "146749"
-    tk = "146888"
+    sk = "AUTHOR_STRUCTURE"
+    tk = "PUB_AUTHOR"
   end
 
   pk = object.id.to_s

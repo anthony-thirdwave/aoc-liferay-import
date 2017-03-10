@@ -36,6 +36,7 @@ def create_cnwo_from_cnwonline(files)
 		params << id = i + 1
 		params << p_file = file_a
 		params << all_images = get_all_images(file, f)
+		params << get_rotator_content(file, f)
 		if COLUMNAUTHORS.include? params[3]
 			if !file.include? "_pl"
 				cnwonline << ColumnArticle.new(params)

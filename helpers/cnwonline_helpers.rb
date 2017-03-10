@@ -259,3 +259,7 @@ def get_image(file, f)
 	end
 	final_image
 end
+
+def get_rotator_content(file, f)
+	f.xpath('//div[@id="ImageRotator"]')
+end

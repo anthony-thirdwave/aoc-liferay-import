@@ -15,7 +15,7 @@ def build_galleries_xml(galleries, fid)
         }
         xml.send(:"dynamic-element", 'name' => 'Cover_Image', 'type' => 'document_library', 'index-type' => 'keyword', 'index' => '0') {
           xml.send(:"dynamic-content", 'language-id' => 'en_US') {
-            xml.cdata remap_image(gallery.cover_image)
+            xml.cdata gallery.gallery[0][0]
           }
         }
         gallery.gallery.each_with_index do |content, index|
@@ -34,9 +34,9 @@ def build_galleries_xml(galleries, fid)
         end
       }
     end
-    # file = File.new("xml/galleries-xml/gallery-#{gallery.id}.xml", 'w')
-    # file.puts builder.to_xml
-    invoke_liferay_api(builder.to_xml, gallery, fid)
+    file = File.new("xml/galleries-xml/gallery-#{gallery.id}.xml", 'w')
+    file.puts builder.to_xml
+    # invoke_liferay_api(builder.to_xml, gallery, fid)
     progressbar.increment
   end
   puts "Success!"

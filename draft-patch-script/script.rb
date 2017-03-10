@@ -1,4 +1,5 @@
 require 'json'
+
 # Variables
 ################################################################################
 URL = "http://localhost:8080/api/jsonws/journalarticle/update-status"
