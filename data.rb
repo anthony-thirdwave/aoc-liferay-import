@@ -15,6 +15,7 @@ require 'awesome_print'
 require 'pry'
 
 FileUtils.mkdir('./xml') unless File.directory?('./xml')
+FileUtils.mkdir('./sql') unless File.directory?('./sql')
 
 FileUtils.mkdir('./xml/columns-xml') unless File.directory?('./xml/columns-xml')
 FileUtils.mkdir('./xml/publications-xml') unless File.directory?('./xml/publications-xml')
@@ -29,10 +30,12 @@ FileUtils.mkdir('./xml/authors-xml/') unless File.directory?('./xml/authors-xml'
 @username = "test@thirdwavellc.com"
 @password = "test"
 
-@columns_fid = "21299"
-@publications_fid = "21302"
-@galleries_fid = "21305"
-@authors_fid = "21296"
+@columns_fid = "132679"
+@publications_fid = "132685"
+@galleries_fid = "132691"
+@pub_galleries_fid = "132697"
+@col_galleries_fid = "132694"
+@authors_fid = "132682"
 ################################################################################
 
 @column_articles = []

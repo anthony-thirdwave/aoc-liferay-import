@@ -16,7 +16,7 @@ def invoke_liferay_api(xml, object, fid)
   minute = date.strftime('%M')
 
   if object.is_a?(Gallery)
-    title = object.title.force_encoding('ISO-8859-1').encode('UTF-8')
+    title = object.title.force_encoding('ISO-8859-1').encode('UTF-8').gsub("'", "")
   elsif object.is_a?(Author)
     title = object.name
   else

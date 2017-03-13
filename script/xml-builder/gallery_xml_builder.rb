@@ -1,4 +1,5 @@
 def build_galleries_xml(galleries, fid)
+  ids = ["1495", "1574"]
   progressbar = ProgressBar.create(:total => galleries.length)
   galleries.each do |gallery|
     builder = Nokogiri::XML::Builder.new do |xml|
@@ -27,7 +28,7 @@ def build_galleries_xml(galleries, fid)
             }
             xml.send(:"dynamic-element", 'name' => 'Caption_and_Credit', 'index' => index, 'type' => 'text_box', 'index-type' => 'keyword') {
               xml.send(:"dynamic-content", 'language-id' => 'en_US') {
-                xml.cdata content[1].force_encoding('ISO-8859-1').encode('UTF-8')
+                xml.cdata content[1].force_encoding('ISO-8859-1').encode('UTF-8').gsub("&amp;", "and")
               }
             }
           }
@@ -36,16 +37,18 @@ def build_galleries_xml(galleries, fid)
     end
     case galleries
     when @col_galleries
-      file = File.new("xml/galleries-xml/columns/gallery-#{gallery.id}.xml", 'w')
-      file.puts builder.to_xml
+      # file = File.new("xml/galleries-xml/columns/gallery-#{gallery.id}.xml", 'w')
+      # file.puts builder.to_xml
+      # invoke_liferay_api(builder.to_xml, gallery, fid)
     when @pub_galleries
-      file = File.new("xml/galleries-xml/publications/gallery-#{gallery.id}.xml", 'w')
-      file.puts builder.to_xml
+      # file = File.new("xml/galleries-xml/publications/gallery-#{gallery.id}.xml", 'w')
+      # file.puts builder.to_xml
+      invoke_liferay_api(builder.to_xml, gallery, fid)
     else
-      file = File.new("xml/galleries-xml/galleries/gallery-#{gallery.id}.xml", 'w')
-      file.puts builder.to_xml
+      # file = File.new("xml/galleries-xml/galleries/gallery-#{gallery.id}.xml", 'w')
+      # file.puts builder.to_xml
+      # invoke_liferay_api(builder.to_xml, gallery, fid)
     end
-    # invoke_liferay_api(builder.to_xml, gallery, fid)
     progressbar.increment
   end
   puts "Success!"
