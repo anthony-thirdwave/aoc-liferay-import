@@ -43,9 +43,18 @@ task :csv do
 	ruby 'script/build_csv.rb'
 end
 
+desc 'Generates and POSTs LifeRay associations'
+task :sql do
+	ruby 'script/sql_builder.rb'
+	puts "\nAdding JournalArticle relations to database..."
+	sh 'sh sql/import_relations.sh'
+	puts "Success!"
+end
+
 desc 'Test functions'
 task :test do
 	ruby 'script/dependencies.rb'
 	puts "\nTesting Functions..."
 	ruby 'test.rb'
 end
+

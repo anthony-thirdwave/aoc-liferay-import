@@ -9,6 +9,14 @@
 
 4. Execute `$ rake api:all` in your terminal. (Use `$ rake --tasks` to see all options)
 
+## Associations
+1. Grab all the objects
+`SELECT resourcePrimKey,classPk FROM aoc_default_portal.JournalArticle WHERE structureId='ARTICLE_STRUCTURE';`
+
+`SELECT resourcePrimKey,classPk FROM aoc_default_portal.JournalArticle WHERE structureId='COLUMN_STRUCTURE';`
+
+`SELECT resourcePrimKey,classPk FROM aoc_default_portal.JournalArticle WHERE structureId='GALLERY_STRUCTURE' AND folderId='';`
+
 
 ### Broken Objects
 Broken Columns

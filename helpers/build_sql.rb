@@ -12,10 +12,22 @@ def build_sql(galleries, articles, marker)
 	end
   file.puts lines
   marker += (galleries.length * 2)
-  marker
 end
 
-# marker = 0
-# marker = build_sql(galleries, articles, marker)
-# marker = build_sql(galleries, articles, marker)
-
+def associate_content(galleries, articles)
+	progressbar = ProgressBar.create(:total => galleries.length)
+	ids = { "galleries" => [], "articles" => [] }
+	assets = import_json('json/asset_entries.json')
+	galleries.each do |gallery|
+		articles.each do |article|
+			if gallery["classPk"] == article["classPk"]
+				assets.each do |asset|
+					ids["galleries"] << asset["entryId"] if gallery["resourcePrimKey"] == asset["classPK"]
+					ids["articles"] << asset["entryId"] if article["resourcePrimKey"] == asset["classPK"]
+				end
+			end
+		end
+		progressbar.increment
+	end
+	ids
+end
