@@ -39,7 +39,7 @@ def build_galleries_xml(galleries, fid)
     when @col_galleries
       # file = File.new("xml/galleries-xml/columns/gallery-#{gallery.id}.xml", 'w')
       # file.puts builder.to_xml
-      # invoke_liferay_api(builder.to_xml, gallery, fid)
+      invoke_liferay_api(builder.to_xml, gallery, fid)
     when @pub_galleries
       # file = File.new("xml/galleries-xml/publications/gallery-#{gallery.id}.xml", 'w')
       # file.puts builder.to_xml
@@ -47,7 +47,7 @@ def build_galleries_xml(galleries, fid)
     else
       # file = File.new("xml/galleries-xml/galleries/gallery-#{gallery.id}.xml", 'w')
       # file.puts builder.to_xml
-      # invoke_liferay_api(builder.to_xml, gallery, fid)
+      invoke_liferay_api(builder.to_xml, gallery, fid)
     end
     progressbar.increment
   end

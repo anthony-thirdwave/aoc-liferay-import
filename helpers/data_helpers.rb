@@ -11,8 +11,7 @@ def split_articles(articles)
 	[columns, publications]
 end
 
+# Merged columns
 def column_id_rewrite(columns)
-	columns.each_with_index do |column, index|
-		column.id = index + 1
-	end
+  columns.each_with_index { |column, index| column.id = index + 1 }
 end

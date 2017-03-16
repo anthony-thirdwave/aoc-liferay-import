@@ -15,7 +15,11 @@
 
 `SELECT resourcePrimKey,classPk FROM aoc_default_portal.JournalArticle WHERE structureId='COLUMN_STRUCTURE';`
 
-`SELECT resourcePrimKey,classPk FROM aoc_default_portal.JournalArticle WHERE structureId='GALLERY_STRUCTURE' AND folderId='';`
+`SELECT resourcePrimKey,classPk FROM aoc_default_portal.JournalArticle WHERE structureId='GALLERY_STRUCTURE' AND folderId='132890';`
+
+`SELECT resourcePrimKey,classPk FROM aoc_default_portal.JournalArticle WHERE structureId='GALLERY_STRUCTURE' AND folderId='132887';`
+
+`SELECT entryId,classPK FROM aoc_default_portal.AssetEntry;`
 
 
 ### Broken Objects

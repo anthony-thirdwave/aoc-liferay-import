@@ -26,10 +26,10 @@ def invoke_liferay_api(xml, object, fid)
   case object
   when ColumnArticle
   	sk = "COLUMN_STRUCTURE"
-  	tk = "110602"
+  	tk = "PUB_COLUMN"
   when PublicationArticle
     sk = "ARTICLE_STRUCTURE"
-    tk = "109324"
+    tk = "PUB_ARTICLE"
   when Gallery
     sk = "GALLERY_STRUCTURE"
     tk = "GALLERY_TEMPLATE"

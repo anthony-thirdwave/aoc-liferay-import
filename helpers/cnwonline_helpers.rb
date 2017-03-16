@@ -2,7 +2,7 @@ def get_cnwonline_files
 	files = []
 	Dir.glob("#{Dir.pwd}/assets/www.chicagocatholic.com/cnwonline/**/*").each do |file|
 		if file.split("/")[-3] != "cnwonline" && file.split("/")[-2] != "cnwonline"
-			if !file.include? "?" 
+			if !file.include? "?"
 				if !file.include? "images"
 					if !file.include? "obit"
 						if !file.include? "news"
@@ -93,7 +93,7 @@ def get_date(file)
 	if file.split("/")[-2] != "News"
 		month = file.split("/")[-2][0..1].to_i
 		day = file.split("/")[-2][2..3].to_i
-	else 
+	else
 		month = file.split("/")[-1][0..1].to_i
 		day = file.split("/")[-1][2..3].to_i
 	end
@@ -159,7 +159,7 @@ def get_contributors(file)
 	end
 end
 
-# 46.43% of articles don't have images. 
+# 46.43% of articles don't have images.
 def get_image_data(file, f)
 	images = f.xpath('//div[@id="articletext"]/div[@id="ImageRotator"]')
 	images = images.empty? ? f.xpath('//div[@class="article"]/div[@id="ImageRotator"]') : images
