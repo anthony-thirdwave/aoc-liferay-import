@@ -1,5 +1,5 @@
 def build_sql(galleries, articles, marker)
-	file = File.new("sql/#{articles.first.class.to_s.downcase}-gallery-#{marker.to_s}.sql", "w")
+	file = File.new("sql/gallery-#{marker.to_s}.sql", "w")
 	lines = []
 	counter = 0
 	(marker..(marker + galleries.length * 2)).each do |i|

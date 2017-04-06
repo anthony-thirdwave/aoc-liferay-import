@@ -1,4 +1,7 @@
 def remap_image(image_path)
+  if image_path.nil?
+    return
+  end
 	folders = import_json('json/image_folders.json')
 	images = import_json('json/images.json')
 	tree = [0]
@@ -12,7 +15,7 @@ def remap_image(image_path)
 			end
 		end
 	end
-	tree -= [0]		
+	tree -= [0]
 	tree = tree.map { |e| e.to_s }.join("/").prepend("/").concat("/")
 	images.each do |image|
 		if image["title"] == tree_ascii.last

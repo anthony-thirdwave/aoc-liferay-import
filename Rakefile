@@ -1,5 +1,5 @@
-task :default do 
-	ARGV.each { |a| task a.to_sym do ; end } 
+task :default do
+	ARGV.each { |a| task a.to_sym do ; end }
 	if ARGV[1].nil?
 		puts "Sorry, command not understood. Please use: \n$ rake -T\nto see a list of all available rake tasks."
 	end
@@ -38,7 +38,7 @@ namespace :api do
 end
 
 desc 'Creates a CSV of all article titles.'
-task :csv do 
+task :csv do
 	ruby 'script/dependencies.rb'
 	ruby 'script/build_csv.rb'
 end

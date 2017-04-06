@@ -15,9 +15,9 @@
 
 `SELECT resourcePrimKey,classPk FROM aoc_default_portal.JournalArticle WHERE structureId='COLUMN_STRUCTURE';`
 
-`SELECT resourcePrimKey,classPk FROM aoc_default_portal.JournalArticle WHERE structureId='GALLERY_STRUCTURE' AND folderId='132890';`
+`SELECT resourcePrimKey,classPk FROM aoc_default_portal.JournalArticle WHERE structureId='GALLERY_STRUCTURE' AND folderId='132755';`
 
-`SELECT resourcePrimKey,classPk FROM aoc_default_portal.JournalArticle WHERE structureId='GALLERY_STRUCTURE' AND folderId='132887';`
+`SELECT resourcePrimKey,classPk FROM aoc_default_portal.JournalArticle WHERE structureId='GALLERY_STRUCTURE' AND folderId='132752';`
 
 `SELECT entryId,classPK FROM aoc_default_portal.AssetEntry;`
 

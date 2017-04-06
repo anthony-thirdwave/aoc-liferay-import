@@ -24,11 +24,16 @@ def build_author_xml(authors, fid)
         }
       }
     end
-    # file = File.new("xml/authors-xml/author-#{author.id}.xml", 'w')
-    # file.puts builder.to_xml
-    if !BROKENAUTHORS.include?(author.id.to_i)
-      invoke_liferay_api(builder.to_xml, author, fid)
+    if fid == 0
+      file = File.new("xml/2016_issues/authors-xml/author-#{author.id}.xml", "w")
+      file.puts builder.to_xml
+    else
+      file = File.new("xml/authors-xml/author-#{author.id}.xml", 'w')
+      file.puts builder.to_xml
     end
+    #if !BROKENAUTHORS.include?(author.id.to_i)
+      #invoke_liferay_api(builder.to_xml, author, fid)
+    #end
     progressbar.increment
   end
   puts "Success!"

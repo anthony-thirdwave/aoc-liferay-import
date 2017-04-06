@@ -1,5 +1,4 @@
 def build_galleries_xml(galleries, fid)
-  ids = ["1495", "1574"]
   progressbar = ProgressBar.create(:total => galleries.length)
   galleries.each do |gallery|
     builder = Nokogiri::XML::Builder.new do |xml|
@@ -14,7 +13,7 @@ def build_galleries_xml(galleries, fid)
             xml.cdata gallery.intro.force_encoding('ISO-8859-1').encode('UTF-8').gsub("&amp;", "and")
           }
         }
-        xml.send(:"dynamic-element", 'name' => 'Cover_Image', 'type' => 'document_library', 'index-type' => 'keyword', 'index' => '0') {
+        xml.send(:"dynamic-element", 'name' => 'Gallery_Cover_Image', 'type' => 'document_library', 'index-type' => 'keyword', 'index' => '0') {
           xml.send(:"dynamic-content", 'language-id' => 'en_US') {
             xml.cdata gallery.gallery[0][0]
           }

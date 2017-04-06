@@ -81,11 +81,17 @@ def build_publications_xml(publications, fid)
         }
       }
     end
-    # file = File.new("xml/publications-xml/publication-#{publication.id}.xml", 'w')
-    # file.puts builder.to_xml
-    if !BROKENPUBLICATIONS.include?(publication.id.to_i)
-      invoke_liferay_api(builder.to_xml, publication, fid)
+
+    if fid == 0
+      file = File.new("xml/2016_issues/publications-xml/publication-#{publication.id}.xml", 'w')
+      file.puts builder.to_xml
+    else
+      file = File.new("xml/publications-xml/publication-#{publication.id}.xml", 'w')
+      file.puts builder.to_xml
     end
+    # if !BROKENPUBLICATIONS.include?(publication.id.to_i)
+    #   invoke_liferay_api(builder.to_xml, publication, fid)
+    # end
     progressbar.increment
   end
   puts "Success!"
