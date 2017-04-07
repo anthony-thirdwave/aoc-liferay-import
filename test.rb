@@ -52,10 +52,19 @@ columns += column_publications[0]
 column_id_rewrite(columns)
 authors = create_authors(columns, publications)
 
-publications.each { |publication| ap publication.rotator }
+#@sh_commands = []
+#publications.each { |publication| publication.all_images = create_image_links(grab_images(publication.rotator), publication.file) }
+#publications.each { |pub| download_images(pub.all_images, @sh_commands) }
+
+#file = File.new("assets/issue_images/grab_images.sh", "w")
+#file.puts @sh_commands
+
+publications.each { |pub| pub.all_images = [create_image_links(grab_images(pub.rotator), pub.file), get_issue_credits(pub.rotator)] }
+publications.each { |pub| create_galleries(pub.all_images, pub.title, pub.file) }
 
 #columns = rewrite_cover_image(create_rotator(columns))
 #publications = rewrite_cover_image(create_rotator(publications))
+
 
 #col_galleries = create_related_galleries(columns)
 #pub_galleries = create_related_galleries(publications)
